@@ -79,6 +79,8 @@ class PurchaseController extends Controller
     {
 
         $data['purchase'] = $request->validate([
+            'price'              => 'required',
+            'qty'                => 'required',
             'product_id'         => 'required',
             'supplier_id'        => 'required',
             'thumbnail'          => 'image|mimes:jpg,jpeg,png,svg',
@@ -101,6 +103,7 @@ class PurchaseController extends Controller
 
         try {
             DB::beginTransaction();
+
             $purchase = self::storePurhcase($data['purchase']);
             $purchase_details = self::storePurhcaseDetails($data['purchase_details'],$purchase->id);
             $purchase_payment = self::storePurhcasePayments($data['purchase_payment'],$purchase_details->id);

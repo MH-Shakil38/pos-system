@@ -66,6 +66,12 @@
                         <input type="number" class="form-control" name="qty" placeholder="Ex: 22">
                     </div>
                 </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" name="price" placeholder="Ex: 22">
+                    </div>
+                </div>
                 <div class="col-lg-12">
                     <div class="form-group">
                         <label>Description</label>

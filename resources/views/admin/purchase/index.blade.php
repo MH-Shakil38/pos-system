@@ -163,24 +163,24 @@
                                Supplier Name
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Date: activate to sort column ascending" style="width: 63.0781px;">Purchase Date
+                                aria-label="Date: activate to sort column ascending" style="width: 63.0781px;">Category
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Status: activate to sort column ascending" style="width: 60px;">Status
+                                aria-label="Date: activate to sort column ascending" style="width: 63.0781px;">Color
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                aria-label="Status: activate to sort column ascending" style="width: 60px;">Size
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                 aria-label="Grand Total: activate to sort column ascending" style="width: 75.1719px;">
-                                Price
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Paid: activate to sort column ascending" style="width: 27.8594px;">Quantity
+                                Quantity
                             </th>
 {{--                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"--}}
 {{--                                aria-label="Due: activate to sort column ascending" style="width: 26px;">Due--}}
 {{--                            </th>--}}
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                 aria-label="Payment Status: activate to sort column ascending"
-                                style="width: 101.047px;">Payment Status
+                                style="width: 101.047px;">Price
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                 aria-label="Action: activate to sort column ascending" style="width: 50.8906px;">Action
@@ -199,11 +199,11 @@
                             </td>
                             <td class="text-bolds">{{$item->product->name}}</td>
                             <td>{{$item->supplier->name}}</td>
-                            <td>{{$item->created_at}}</td>
-                            <td><span class="badges bg-lightgreen">Received</span></td>
+                            <td>{{$item->purchase_detail->category->name}}</td>
+                            <td>{{$item->purchase_detail->color->name}}</td>
+                            <td>{{$item->purchase_detail->size->name}}</td>
                             <td>{{$item->qty}}</td>
-                            <td><span class="{{$item->qty>0 ? 'badges bg-lightgreen' : 'badges bg-danger'}}">{{$item->qty>0 ? $item->qty : 'Out Of Stcok'}}</span></td>
-                            <td><span class="badges bg-lightgreen">Paid</span></td>
+                            <td>{{$item->price}}</td>
                             <td>
                                 <a class="me-3"
                                    href="https://dreamspos.dreamguystech.com/laravel/template/public/editpurchase">

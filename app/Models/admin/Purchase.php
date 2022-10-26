@@ -14,6 +14,7 @@ class Purchase extends Model
         'supplier_id',
         'thumbnail',
         'qty',
+        'price',
         'details',
         'status',
         'created_by',
