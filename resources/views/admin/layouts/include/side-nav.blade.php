@@ -103,12 +103,12 @@
                             alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/saleslist">Sales
+                               href="{{route('admin.sale.index')}}">Sales
                                 List</a></li>
                         <li><a class=""
                                href="https://dreamspos.dreamguystech.com/laravel/template/public/pos">POS</a></li>
                         <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/add-sales">New
+                               href="{{route('admin.sale.create')}}">New
                                 Sales</a></li>
                         <li><a class=""
                                href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreturnlists">Sales
@@ -188,26 +188,26 @@
                             alt="img"><span> People</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/customerlist">Customer
+                               href="{{route('admin.customer.index')}}">Customer
                                 List</a></li>
                         <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addcustomer">Add
+                               href="{{route('admin.customer.create')}}">Add
                                 Customer </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier
-                                List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add
-                                Supplier </a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User
-                                List</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add
-                                User</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store
-                                List</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add
-                                Store</a></li>
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier--}}
+{{--                                List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add--}}
+{{--                                Supplier </a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User--}}
+{{--                                List</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add--}}
+{{--                                User</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store--}}
+{{--                                List</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add--}}
+{{--                                Store</a></li>--}}
                     </ul>
                 </li>
                 <li class="submenu">

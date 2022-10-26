@@ -10,6 +10,8 @@ use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\admin\SupplierController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\PurchaseController;
+use App\Http\Controllers\admin\SaleController;
+use App\Http\Controllers\admin\CustomerController;
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
@@ -29,5 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix'=>'purchase','as'=>'admin.'], function(){
         Route::resource('/purchase',PurchaseController::class,['name'=>'purchase']);
+    });
+    Route::group(['prefix'=>'sale','as'=>'admin.'], function(){
+        Route::resource('/sale',SaleController::class,['name'=>'sale']);
+    });Route::group(['prefix'=>'customer','as'=>'admin.'], function(){
+        Route::resource('/customer',CustomerController::class,['name'=>'customer']);
     });
 });
