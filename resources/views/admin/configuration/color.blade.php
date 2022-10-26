@@ -7,6 +7,7 @@
                     <div class="card-body">
                         <h2 class="bg-gradient-lightblue p-2 rounded">Color Create</h2>
                         <hr>
+                        @include('admin.include.success-message')
                         @if(Session::has('success'))
                             <p class="alert alert-info">{{ Session::get('success') }}</p>
                         @endif

@@ -13,7 +13,8 @@
 
     <div class="card">
         <div class="card-body">
-            @if(isset($customer))
+            @include('admin.include.success-message')
+        @if(isset($customer))
                 {{ Form::model($customer,['route'=>['admin.customer.update',$customer->id],"method"=>"PATCH","files"=>true]) }}
             @else
                 {{ Form::open(['route'=>['admin.customer.store'],"method"=>"POST","files"=>true]) }}
@@ -40,13 +41,13 @@
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="form-group">
                         <label>Country</label>
-                        {!! Form::select('country_id',[1=>'bangladesh'],null, ['class'=>'form-control select2','placeholder'=>'Select Brand']) !!}
+                        {!! Form::select('country_id',[1=>'bangladesh'],null, ['class'=>'form-control select2','placeholder'=>'Select Country']) !!}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="form-group">
                         <label>City</label>
-                        {!! Form::select('city_id',[1=>'Dhaka',2=>'Chittagong'],null, ['class'=>'form-control select2','placeholder'=>'Select Color']) !!}
+                        {!! Form::select('city_id',[1=>'Dhaka',2=>'Chittagong'],null, ['class'=>'form-control select2','placeholder'=>'Select City']) !!}
                     </div>
                 </div>
                 <div class="col-lg-9 col-12">
@@ -59,7 +60,7 @@
                     <div class="form-group">
                         <label> Product Image</label>
                         <div class="image-upload">
-                            <input type="file" name="pictures" multiple>
+                            <input type="file" name="picture" multiple>
                             <div class="image-uploads">
                                 <img
                                     src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/upload.svg"

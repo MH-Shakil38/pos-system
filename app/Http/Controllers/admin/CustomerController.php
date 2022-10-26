@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\Customer;
 use App\Models\Category;
 use App\Service\PosService;
+use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,7 @@ use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
+    use PosTrait;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +23,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-       return view('admin.people.add-customer');
+        $data['customers'] = Customer::query()->cursor();
+       return view('admin.people.customer-list')->with($data);
     }
 
     /**
@@ -31,7 +34,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.people.add-customer');
     }
 
     /**
@@ -50,16 +53,16 @@ class CustomerController extends Controller
             'city_id'       =>'nullable',
             'address'       =>'nullable',
             'description'   =>'nullable',
-            'pictures'      =>'nullable',
+            'picture'      =>'nullable',
         ]);
         try {
             DB::beginTransaction();
-            $data['value'] = ['customer_code' =>  'c-'.rand(0,9999), 'created_by' => Auth::user()->id];
+            $data['value'] = ['customer_code' => 'c-'.rand(0,9999), 'created_by' => Auth::user()->id];
             $data = array_merge($data['value'],$data['request']);
-            $category = Category::query()->create($data);
-            if($request->hasFile("thumbnail")){
-                $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::CATEGORY_IMAGE,429,500,"storage/project_files /category/");
-                $category->update(["thumbnail"=>$data["thumbnail"]]);
+            $customer = Customer::query()->create($data);
+            if($request->hasFile("picture")){
+                $data["picture"] = $this->FileProcessing($request->file("picture"),PosService::CUSTOMER_IMAGE,429,500);
+                $customer->update(["pictures"=>$data["picture"]]);
             }
             DB::commit();
             return redirect()->back()->with('success','Category Successfully Inserted');

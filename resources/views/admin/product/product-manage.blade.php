@@ -16,9 +16,7 @@
     <div class="card">
         <div class="card-body">
             @include('admin.include.table-header')
-            @if(Session::has('success'))
-                <p class="alert alert-info">{{ Session::get('success') }}</p>
-            @endif
+            @include('admin.include.success-message')
             <div class="table-responsive">
                 <table class="table  datanew">
                     <thead>

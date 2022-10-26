@@ -120,6 +120,34 @@
                 </li>
                 <li class="submenu">
                     <a class="" href="javascript:void(0);"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"
+                            alt="img"><span> People</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class=""
+                               href="{{route('admin.customer.index')}}">Customer
+                                List</a></li>
+                        <li><a class=""
+                               href="{{route('admin.customer.create')}}">Add
+                                Customer </a></li>
+                        {{--                        <li><a class=""--}}
+                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier--}}
+                        {{--                                List</a></li>--}}
+                        {{--                        <li><a class=""--}}
+                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add--}}
+                        {{--                                Supplier </a></li>--}}
+                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User--}}
+                        {{--                                List</a></li>--}}
+                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add--}}
+                        {{--                                User</a></li>--}}
+                        {{--                        <li><a class=""--}}
+                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store--}}
+                        {{--                                List</a></li>--}}
+                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add--}}
+                        {{--                                Store</a></li>--}}
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a class="" href="javascript:void(0);"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/expense1.svg"
                             alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
                     <ul>

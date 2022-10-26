@@ -7,9 +7,7 @@
                     <div class="card-body">
                         <h2 class="bg-gradient-lightblue p-2 rounded">Brand Create</h2>
                         <hr>
-                        @if(Session::has('success'))
-                            <p class="alert alert-info">{{ Session::get('success') }}</p>
-                        @endif
+                        @include('admin.include.success-message')
                         @if(isset($brand))
                             {{ Form::model($brand,['route'=>['admin.brand.update',$brand->id],"method"=>"PATCH","files"=>true]) }}
                         @else

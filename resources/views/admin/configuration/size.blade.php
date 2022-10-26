@@ -7,9 +7,7 @@
                     <div class="card-body">
                         <h2 class="bg-gradient-lightblue p-2 rounded">size Create</h2>
                         <hr>
-                        @if(Session::has('success'))
-                            <p class="alert alert-info">{{ Session::get('success') }}</p>
-                        @endif
+                        @include('admin.include.success-message')
                         @if(isset($size))
                             {{ Form::model($size,['route'=>['admin.size.update',$size->id],"method"=>"PATCH","files"=>true]) }}
                         @else

@@ -17,6 +17,7 @@
         <div class="card-body">
             @include('admin.include.table-header')
             <hr>
+            @include('admin.include.success-message')
             <div class="table-responsive">
                 <table class="table  datanew">
                     <thead>

@@ -18,5 +18,7 @@ class Customer extends Model
       'address',
       'description',
       'pictures',
+      'customer_code',
+      'created_by',
     ];
 }
