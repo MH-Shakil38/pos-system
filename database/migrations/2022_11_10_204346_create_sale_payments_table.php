@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_images', function (Blueprint $table) {
+        Schema::create('sale_payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->string('picture');
+            $table->unsignedBigInteger('sale_id');
+            $table->unsignedBigInteger('payment_type_id');
+            $table->unsignedDouble('total_paid');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_images');
+        Schema::dropIfExists('sale_payments');
     }
 };

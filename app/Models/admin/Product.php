@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Models\Color;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,7 @@ class Product extends Model
       'product_code',
       'thumbnail',
       'details',
+      'price',
       'stock',
       'created_by',
     ];

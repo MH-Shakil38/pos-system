@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\Product;
+use App\Models\admin\ProductImage;
 use App\Models\Category;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
@@ -69,6 +70,14 @@ class ProductController extends Controller
             if($request->hasFile("thumbnail")){
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::PRODUCT_THUMBNAIL,429,500,"storage/project_files /category/");
                 $product->update(["thumbnail"=>$data["thumbnail"]]);
+            }
+            if($pictures =$request->hasFile("pictures")) {
+                $image = new ProductImage();
+                foreach ($request['pictures'] as $file) {
+                    $data["picture"] = $this->FileProcessing($file, PosService::PRODUCT_IMAGE, 429, 500);
+                    $image->create(['product_id' => $product->id, "picture" => $data["picture"]]);
+//                    $purchase_details->update(["picture"=>$data["picture"]]);
+                }
             }
             DB::commit();
             return redirect()->back()->with('success','Category Successfully Inserted');

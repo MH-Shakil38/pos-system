@@ -11,13 +11,19 @@ return new class extends Migration
      *
      * @return void
      */
-//    public function up()
-//    {
-////        Schema::create('sales', function (Blueprint $table) {
-////            $table->id();
-////            $table->timestamps();
-////        });
-//    }
+    public function up()
+    {
+        Schema::create('sales', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->unsignedDouble('status')->nullable();
+            $table->string('note')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('product_code');
             $table->string('thumbnail');
             $table->string('details');
+            $table->unsignedDouble('price');
             $table->unsignedDouble('stock')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

@@ -1,5 +1,5 @@
 
-<div class="header">
+<div class="header" style="background: lightseagreen">
     <div class="header-left active">
         <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo">
             <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo.png" alt="">

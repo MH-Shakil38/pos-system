@@ -33,8 +33,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/purchase',PurchaseController::class,['name'=>'purchase']);
     });
     Route::group(['prefix'=>'sale','as'=>'admin.'], function(){
+        Route::get('invoice/{id}','\App\Http\Controllers\admin\SaleController@invoice')->name('sale.invoice');
+        Route::post('product','\App\Http\Controllers\admin\SaleController@addSale')->name('add-product');
         Route::resource('/sale',SaleController::class,['name'=>'sale']);
-    });Route::group(['prefix'=>'customer','as'=>'admin.'], function(){
+    });
+    Route::group(['prefix'=>'customer','as'=>'admin.'], function(){
         Route::resource('/customer',CustomerController::class,['name'=>'customer']);
     });
 });

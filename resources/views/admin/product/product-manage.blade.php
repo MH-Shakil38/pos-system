@@ -18,7 +18,7 @@
             @include('admin.include.table-header')
             @include('admin.include.success-message')
             <div class="table-responsive">
-                <table class="table  datanew">
+                <table class="table  datanew border-danger" style="max-width: 1200px">
                     <thead>
                     <tr class="bg-gradient-gray">
                         <th>
@@ -46,12 +46,12 @@
                             </td>
                             <td class="productimgname">
                                 <a href="javascript:void(0);" class="product-img">
-                                    <img src="{{asset($info->thumbnail)}}" alt="product">
+                                    <img src="{{asset($info->thumbnail)}}" alt="">
                                 </a>
                                 <a href="javascript:void(0);">{{$info->name}}</a>
                             </td>
-                            <td>{{$info->details}}</td>
-                            <td>{{$info->product_code}}</td>
+                            <td style="width: 80px">{{$info->details}}</td>
+                            <td >{{$info->product_code}}</td>
                             <td>{{$info->sku_no}}</td>
                             <td>{{$info->stock}}</td>
                             <td class="d-flex">
@@ -128,6 +128,20 @@
                                         <div class="form-group">
                                             <label for="">Price</label>
                                             <input type="number" class="form-control" name="price" value="{{ $product->price ?? ''}}" placeholder="Enter Price">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-sm-12 col-12">
+                                        <div class="form-group">
+                                            <label> Product Image</label>
+                                            <div class="image-upload">
+                                                <input type="file" name="pictures[]" multiple>
+                                                <div class="image-uploads">
+                                                    <img
+                                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/upload.svg"
+                                                        alt="img">
+                                                    <h4>Drag and drop a file to upload</h4>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

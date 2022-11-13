@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->double('qty')->nullable();
             $table->string('details')->nullable();
+            $table->unsignedDouble('price')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

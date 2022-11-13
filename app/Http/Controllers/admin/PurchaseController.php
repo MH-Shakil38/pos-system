@@ -78,7 +78,6 @@ class PurchaseController extends Controller
     {
 
         $data['purchase'] = $request->validate([
-            'price'              => 'required',
             'qty'                => 'required',
             'product_id'         => 'required',
             'supplier_id'        => 'required',
