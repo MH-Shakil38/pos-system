@@ -114,6 +114,22 @@
                 </li>
                 <li class="submenu">
                     <a class="" href="javascript:void(0);"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/sales1.svg"
+                            alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class=""
+                               href="#">Customer Report</a></li>
+                        <li><a class=""
+                               href="#">Supplier Report</a></li>
+                        <li><a class=""
+                               href="#">Sale Report</a></li>
+                        {{--                        <li><a class=""--}}
+                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New--}}
+                        {{--                                Sales Return</a></li>--}}
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a class="" href="javascript:void(0);"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"
                             alt="img"><span> People</span> <span class="menu-arrow"></span></a>
                     <ul>
