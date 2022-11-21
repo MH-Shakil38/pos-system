@@ -13,21 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sale_cards', function (Blueprint $table) {
+        Schema::create('purchase_cards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->unsignedBigInteger('supplier_id');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->unsignedBigInteger('color_id')->nullable();
             $table->unsignedBigInteger('size_id')->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('color_id')->references('id')->on('colors');
-            $table->foreign('size_id')->references('id')->on('sizes');
+            $table->unsignedBigInteger('origin_id')->nullable();
             $table->unsignedBigInteger('qty');
-            $table->unsignedDouble('total_price');
-            $table->softDeletes();
+            $table->double('purchase_price')->nullable();
+            $table->double('selling_price')->nullable();
+            $table->double('total')->nullable();
             $table->timestamps();
         });
     }
@@ -39,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sale_cards');
+        Schema::dropIfExists('purchase_cards');
     }
 };

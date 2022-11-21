@@ -64,12 +64,6 @@
                     </a>
                     <ul>
                         <li>
-                            <a class="{{ Route::is('admin.supplier.index') ? 'active' : '' }}"
-                               href="{{route('admin.supplier.index')}}">
-                                Supplier
-                            </a>
-                        </li>
-                        <li>
                             <a class="{{ Route::is('admin.product.index') ? 'active' : '' }}"
                                href="{{route('admin.product.index')}}">
                                 Product List
@@ -105,17 +99,17 @@
                         <li><a class=""
                                href="{{route('admin.sale.index')}}">Sales
                                 List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/pos">POS</a></li>
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/pos">POS</a></li>--}}
                         <li><a class=""
                                href="{{route('admin.sale.create')}}">New
                                 Sales</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreturnlists">Sales
-                                Return List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New
-                                Sales Return</a></li>
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreturnlists">Sales--}}
+{{--                                Return List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New--}}
+{{--                                Sales Return</a></li>--}}
                     </ul>
                 </li>
                 <li class="submenu">
@@ -123,388 +117,384 @@
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"
                             alt="img"><span> People</span> <span class="menu-arrow"></span></a>
                     <ul>
+                        <li>
+                            <a class="{{ Route::is('admin.supplier.index') ? 'active' : '' }}"
+                               href="{{route('admin.supplier.index')}}">
+                                Supplier
+                            </a>
+                        </li>
+                        <li>
+                            <a class=""
+                               href="{{route('admin.customer.index')}}">
+                                Customer List
+                            </a>
+                        </li>
                         <li><a class=""
-                               href="{{route('admin.customer.index')}}">Customer
-                                List</a></li>
-                        <li><a class=""
-                               href="{{route('admin.customer.create')}}">Add
-                                Customer </a></li>
-                        {{--                        <li><a class=""--}}
-                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier--}}
-                        {{--                                List</a></li>--}}
-                        {{--                        <li><a class=""--}}
-                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add--}}
-                        {{--                                Supplier </a></li>--}}
-                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User--}}
-                        {{--                                List</a></li>--}}
-                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add--}}
-                        {{--                                User</a></li>--}}
-                        {{--                        <li><a class=""--}}
-                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store--}}
-                        {{--                                List</a></li>--}}
-                        {{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add--}}
-                        {{--                                Store</a></li>--}}
+                               href="{{route('admin.customer.create')}}">
+                                Add Customer
+                            </a>
+                        </li>
                     </ul>
                 </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/expense1.svg"
-                            alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/expenselist">Expense
-                                List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createexpense">Add
-                                Expense</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/expensecategory">Expense
-                                Category</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/quotation1.svg"
-                            alt="img"><span> Quotation</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/quotationlist">Quotation
-                                List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addquotation">Add
-                                Quotation</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/transfer1.svg"
-                            alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/transferlist">Transfer
-                                List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addtransfer">Add
-                                Transfer </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/importtransfer">Import
-                                Transfer </a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/return1.svg"
-                            alt="img"><span> Return</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreturnlist">Sales
-                                Return List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturn">Add
-                                Sales Return </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereturnlist">Purchase
-                                Return List</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createpurchasereturn">Add
-                                Purchase Return </a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"
-                            alt="img"><span> People</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="{{route('admin.customer.index')}}">Customer
-                                List</a></li>
-                        <li><a class=""
-                               href="{{route('admin.customer.create')}}">Add
-                                Customer </a></li>
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"--}}
+{{--                            alt="img"><span> People</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
 {{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier--}}
+{{--                               href="{{route('admin.customer.index')}}">Customer--}}
 {{--                                List</a></li>--}}
 {{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add--}}
-{{--                                Supplier </a></li>--}}
-{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User--}}
-{{--                                List</a></li>--}}
-{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add--}}
-{{--                                User</a></li>--}}
+{{--                               href="{{route('admin.customer.create')}}">Add--}}
+{{--                                Customer </a></li>--}}
+{{--                        --}}{{--                        <li><a class=""--}}
+{{--                        --}}{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierlist">Supplier--}}
+{{--                        --}}{{--                                List</a></li>--}}
+{{--                        --}}{{--                        <li><a class=""--}}
+{{--                        --}}{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addsupplier">Add--}}
+{{--                        --}}{{--                                Supplier </a></li>--}}
+{{--                        --}}{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/userlist">User--}}
+{{--                        --}}{{--                                List</a></li>--}}
+{{--                        --}}{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/adduser">Add--}}
+{{--                        --}}{{--                                User</a></li>--}}
+{{--                        --}}{{--                        <li><a class=""--}}
+{{--                        --}}{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store--}}
+{{--                        --}}{{--                                List</a></li>--}}
+{{--                        --}}{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add--}}
+{{--                        --}}{{--                                Store</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/expense1.svg"--}}
+{{--                            alt="img"><span> Expense</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
 {{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/storelist">Store--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/expenselist">Expense--}}
 {{--                                List</a></li>--}}
-{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/addstore">Add--}}
-{{--                                Store</a></li>--}}
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/places.svg"
-                            alt="img"><span> Places</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/newcountry">New
-                                Country</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/countrieslist">Countries
-                                list</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/newstate">New
-                                State </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/statelist">State
-                                list</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/components"><i
-                            data-feather="layers"></i><span> Components</span> </a>
-                </li>
-                <li>
-                    <a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/blankpage"><i
-                            data-feather="file"></i><span> Blank Page</span> </a>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="alert-octagon"></i>
-                        <span> Error Pages </span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/error-404">404
-                                Error </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/error-500">500
-                                Error </a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="box"></i> <span>Elements </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/sweetalerts">Sweet
-                                Alerts</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/tooltip">Tooltip</a>
-                        </li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/popover">Popover</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/ribbon">Ribbon</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/clipboard">Clipboard</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/drag-drop">Drag &
-                                Drop</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/rangeslider">Range
-                                Slider</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/rating">Rating</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/toastr">Toastr</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/text-editor">Text
-                                Editor</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/counter">Counter</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/scrollbar">Scrollbar</a>
-                        </li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/spinner">Spinner</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/notification">Notification</a>
-                        </li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/lightbox">Lightbox</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/stickynote">Sticky
-                                Note</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/timeline">Timeline</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-wizard">Form
-                                Wizard</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="bar-chart-2"></i> <span> Charts </span>
-                        <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-apex">Apex
-                                Charts</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-js">Chart
-                                Js</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-morris">Morris
-                                Charts</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-flot">Flot
-                                Charts</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-peity">Peity
-                                Charts</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="award"></i><span> Icons </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-fontawesome">Fontawesome
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-feather">Feather
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-ionic">Ionic
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-material">Material
-                                Icons</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-pe7">Pe7
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-simpleline">Simpleline
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-themify">Themify
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-weather">Weather
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-typicon">Typicon
-                                Icons</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-flag">Flag
-                                Icons</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="columns"></i> <span> Forms </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-basic-inputs">Basic
-                                Inputs </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-input-groups">Input
-                                Groups </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-horizontal">Horizontal
-                                Form </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-vertical">
-                                Vertical Form </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-mask">Form
-                                Mask </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-validation">Form
-                                Validation </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-select2">Form
-                                Select2 </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-fileupload">File
-                                Upload </a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><i data-feather="layout"></i> <span> Table </span> <span
-                            class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/tables-basic">Basic
-                                Tables </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/data-tables">Data
-                                Table </a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/product.svg"
-                            alt="img"><span> Application</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chat">Chat</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/calendar">Calendar</a>
-                        </li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/email">Email</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/time.svg"
-                            alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaseorderreport">Purchase
-                                order report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/inventoryreport">Inventory
-                                Report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreport">Sales
-                                Report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/invoicereport">Invoice
-                                Report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereport">Purchase
-                                Report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierreport">Supplier
-                                Report</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/customerreport">Customer
-                                Report</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"
-                            alt="img"><span> Users</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/newuser">New
-                                User </a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/userlists">Users
-                                List</a></li>
-                    </ul>
-                </li>
-                <li class="submenu">
-                    <a class="" href="javascript:void(0);"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/settings.svg"
-                            alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>
-                    <ul>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/generalsettings">General
-                                Settings</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/emailsettings">Email
-                                Settings</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/paymentsettings">Payment
-                                Settings</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/currencysettings">Currency
-                                Settings</a></li>
-                        <li><a class=""
-                               href="https://dreamspos.dreamguystech.com/laravel/template/public/grouppermissions">Group
-                                Permissions</a></li>
-                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/taxrates">Tax
-                                Rates</a></li>
-                    </ul>
-                </li>
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createexpense">Add--}}
+{{--                                Expense</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/expensecategory">Expense--}}
+{{--                                Category</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/quotation1.svg"--}}
+{{--                            alt="img"><span> Quotation</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/quotationlist">Quotation--}}
+{{--                                List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addquotation">Add--}}
+{{--                                Quotation</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/transfer1.svg"--}}
+{{--                            alt="img"><span> Transfer</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/transferlist">Transfer--}}
+{{--                                List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/addtransfer">Add--}}
+{{--                                Transfer </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/importtransfer">Import--}}
+{{--                                Transfer </a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/return1.svg"--}}
+{{--                            alt="img"><span> Return</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreturnlist">Sales--}}
+{{--                                Return List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturn">Add--}}
+{{--                                Sales Return </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereturnlist">Purchase--}}
+{{--                                Return List</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createpurchasereturn">Add--}}
+{{--                                Purchase Return </a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/places.svg"--}}
+{{--                            alt="img"><span> Places</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/newcountry">New--}}
+{{--                                Country</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/countrieslist">Countries--}}
+{{--                                list</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/newstate">New--}}
+{{--                                State </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/statelist">State--}}
+{{--                                list</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/components"><i--}}
+{{--                            data-feather="layers"></i><span> Components</span> </a>--}}
+{{--                </li>--}}
+{{--                <li>--}}
+{{--                    <a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/blankpage"><i--}}
+{{--                            data-feather="file"></i><span> Blank Page</span> </a>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="alert-octagon"></i>--}}
+{{--                        <span> Error Pages </span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/error-404">404--}}
+{{--                                Error </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/error-500">500--}}
+{{--                                Error </a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="box"></i> <span>Elements </span> <span--}}
+{{--                            class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/sweetalerts">Sweet--}}
+{{--                                Alerts</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/tooltip">Tooltip</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/popover">Popover</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/ribbon">Ribbon</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/clipboard">Clipboard</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/drag-drop">Drag &--}}
+{{--                                Drop</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/rangeslider">Range--}}
+{{--                                Slider</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/rating">Rating</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/toastr">Toastr</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/text-editor">Text--}}
+{{--                                Editor</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/counter">Counter</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/scrollbar">Scrollbar</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/spinner">Spinner</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/notification">Notification</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/lightbox">Lightbox</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/stickynote">Sticky--}}
+{{--                                Note</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/timeline">Timeline</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-wizard">Form--}}
+{{--                                Wizard</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="bar-chart-2"></i> <span> Charts </span>--}}
+{{--                        <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-apex">Apex--}}
+{{--                                Charts</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-js">Chart--}}
+{{--                                Js</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-morris">Morris--}}
+{{--                                Charts</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-flot">Flot--}}
+{{--                                Charts</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chart-peity">Peity--}}
+{{--                                Charts</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="award"></i><span> Icons </span> <span--}}
+{{--                            class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-fontawesome">Fontawesome--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-feather">Feather--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-ionic">Ionic--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-material">Material--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-pe7">Pe7--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-simpleline">Simpleline--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-themify">Themify--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-weather">Weather--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-typicon">Typicon--}}
+{{--                                Icons</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/icon-flag">Flag--}}
+{{--                                Icons</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="columns"></i> <span> Forms </span> <span--}}
+{{--                            class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-basic-inputs">Basic--}}
+{{--                                Inputs </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-input-groups">Input--}}
+{{--                                Groups </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-horizontal">Horizontal--}}
+{{--                                Form </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-vertical">--}}
+{{--                                Vertical Form </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-mask">Form--}}
+{{--                                Mask </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-validation">Form--}}
+{{--                                Validation </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-select2">Form--}}
+{{--                                Select2 </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/form-fileupload">File--}}
+{{--                                Upload </a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><i data-feather="layout"></i> <span> Table </span> <span--}}
+{{--                            class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/tables-basic">Basic--}}
+{{--                                Tables </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/data-tables">Data--}}
+{{--                                Table </a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/product.svg"--}}
+{{--                            alt="img"><span> Application</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/chat">Chat</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/calendar">Calendar</a>--}}
+{{--                        </li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/email">Email</a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/time.svg"--}}
+{{--                            alt="img"><span> Report</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaseorderreport">Purchase--}}
+{{--                                order report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/inventoryreport">Inventory--}}
+{{--                                Report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreport">Sales--}}
+{{--                                Report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/invoicereport">Invoice--}}
+{{--                                Report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereport">Purchase--}}
+{{--                                Report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierreport">Supplier--}}
+{{--                                Report</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/customerreport">Customer--}}
+{{--                                Report</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"--}}
+{{--                            alt="img"><span> Users</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/newuser">New--}}
+{{--                                User </a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/userlists">Users--}}
+{{--                                List</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
+{{--                <li class="submenu">--}}
+{{--                    <a class="" href="javascript:void(0);"><img--}}
+{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/settings.svg"--}}
+{{--                            alt="img"><span> Settings</span> <span class="menu-arrow"></span></a>--}}
+{{--                    <ul>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/generalsettings">General--}}
+{{--                                Settings</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/emailsettings">Email--}}
+{{--                                Settings</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/paymentsettings">Payment--}}
+{{--                                Settings</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/currencysettings">Currency--}}
+{{--                                Settings</a></li>--}}
+{{--                        <li><a class=""--}}
+{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/grouppermissions">Group--}}
+{{--                                Permissions</a></li>--}}
+{{--                        <li><a class="" href="https://dreamspos.dreamguystech.com/laravel/template/public/taxrates">Tax--}}
+{{--                                Rates</a></li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
             </ul>
         </div>
     </div>

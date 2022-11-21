@@ -1,186 +1,207 @@
-@extends('admin.layouts.master')
-@section('css')
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{asset('assets/css/invoice.css')}}">
-@endsection
-@section('content')
-    <div class="page-content container">
-        <div class="page-header text-blue-d2">
-            <h1 class="page-title text-secondary-d1">
-                Invoice
-                <small class="page-info">
-                    <i class="fa fa-angle-double-right text-80"></i>
-                    ID: #111-222
-                </small>
-            </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Larave Generate Invoice PDF - Nicesnippest.com</title>
+</head>
+<style type="text/css">
+    body {
+        font-family: 'Roboto Condensed', sans-serif;
+    }
 
-            <div class="page-tools">
-                <div class="action-buttons">
-                    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                        <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                        Print
-                    </a>
-                    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                        <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                        Export
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="card" style="background: azure;">
-            <div class="card-header">
-                <div class="container px-0">
-                    <div class="row mt-4">
-                        <div class="col-12 col-lg-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="text-center text-150">
-                                        <i class="fa fa-book fa-2x text-success-m2 mr-1"></i>
-                                        <h2 class="d-inline"><span class="text-default-d3">Maynuddin POS SYSTEM</span>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- .row -->
+    .m-0 {
+        margin: 0px;
+    }
 
-                            <hr class="row brc-default-l1 mx-n1 mb-4"/>
+    .p-0 {
+        padding: 0px;
+    }
 
-                            <div class="row bg-gradient-cyan">
-                                <div class="col-sm-6">
-                                    <div>
-                                        <span class="text-sm text-grey-m2 align-middle">To:</span>
-                                        <span
-                                            class="text-600 text-110 text-blue align-middle">{{$sale_invoice->customer->name}}</span>
-                                    </div>
-                                    <div class="text-grey-m2">
-                                        <div class="my-1">
-                                            {{$sale_invoice->customer->address}}
-                                        </div>
-                                        <div class="my-1">
-                                            {{$sale_invoice->customer->city_id}}
-                                            , {{$sale_invoice->customer->country_id}}
-                                        </div>
-                                        <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i>
-                                            <b class="text-600">{{$sale_invoice->customer->phone}}</b></div>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
+    .pt-5 {
+        padding-top: 5px;
+    }
 
-                                <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                                    <hr class="d-sm-none"/>
-                                    <div class="text-grey-m2">
-                                        <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                            Invoice
-                                        </div>
+    .mt-10 {
+        margin-top: 10px;
+    }
 
-                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                                class="text-600 text-90">ID:</span> #{{$sale_invoice->id}}</div>
+    .text-center {
+        text-align: center !important;
+    }
 
-                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                                class="text-600 text-90">Issue Date:</span>
-                                            {{$sale_invoice->sale_payment->created_at->format('d M y')}}</div>
+    .w-100 {
+        width: 100%;
+    }
 
-                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                                class="text-600 text-90">Status:</span> <span
-                                                class="badge badge-warning badge-pill px-25">Unpaid</span></div>
-                                    </div>
-                                </div>
-                                <!-- /.col -->
-                            </div>
+    .w-50 {
+        width: 50%;
+    }
 
-                            <div class="mt-4">
-                                <div class="row text-600 text-white bgc-default-tp1 py-25">
-                                    <div class="d-none d-sm-block col-1">#</div>
-                                    <div class="col-9 col-sm-5">Description</div>
-                                    <div class="d-none d-sm-block col-4 col-sm-2">Qty</div>
-                                    <div class="d-none d-sm-block col-sm-2">Unit Price</div>
-                                    <div class="col-2">Amount</div>
-                                </div>
-                                @forelse($sale_invoice->sale_details as $sale)
-                                    <div class="text-95 text-secondary-d3">
-                                        <div class="row mb-2 mb-sm-0 py-25">
-                                            <div class="d-none d-sm-block col-1">{{$loop->iteration}}</div>
-                                            <div class="col-9 col-sm-5">{{$sale->product->name}}</div>
-                                            <div class="d-none d-sm-block col-2">{{$sale->qty}}</div>
-                                            <div class="d-none d-sm-block col-2 text-95">Null</div>
-                                            <div
-                                                class="col-2 text-secondary-d2">{{$sale->qty*$sale->product->price}}</div>
-                                        </div>
-                                    </div>
-                                @empty
-                                @endforelse
-                                <div class="row border-b-2 brc-default-l2"></div>
+    .w-85 {
+        width: 85%;
+    }
 
-                                <!-- or use a table instead -->
-                                <!--
-                        <div class="table-responsive">
-                            <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-                                <thead class="bg-none bgc-default-tp1">
-                                    <tr class="text-white">
-                                        <th class="opacity-2">#</th>
-                                        <th>Description</th>
-                                        <th>Qty</th>
-                                        <th>Unit Price</th>
-                                        <th width="140">Amount</th>
-                                    </tr>
-                                </thead>
+    .w-15 {
+        width: 15%;
+    }
 
-                                <tbody class="text-95 text-secondary-d3">
-                                    <tr></tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Domain registration</td>
-                                        <td>2</td>
-                                        <td class="text-95">$10</td>
-                                        <td class="text-secondary-d2">$20</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        -->
-                                <hr>
-                                <div class="row mt-3">
-                                    <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-                                        Extra note such as company or payment information...
-                                    </div>
+    .logo img {
+        width: 45px;
+        height: 45px;
+        padding-top: 30px;
+    }
 
-                                    <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
-{{--                                        <div class="row my-2">--}}
-{{--                                            <div class="col-7 text-right">--}}
-{{--                                                SubTotal--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-5">--}}
-{{--                                                <span class="text-120 text-secondary-d1">$2,250</span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+    .logo span {
+        margin-left: 8px;
+        top: 19px;
+        /*position: absolute;*/
+        font-weight: bold;
+        font-size: 25px;
+    }
 
-{{--                                        <div class="row my-2">--}}
-{{--                                            <div class="col-7 text-right">--}}
-{{--                                                Tax (10%)--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-5">--}}
-{{--                                                <span class="text-110 text-secondary-d1">$225</span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+    .gray-color {
+        color: #5D5D5D;
+    }
 
-                                        <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                            <div class="col-7 text-right">
-                                                Total Amount
-                                            </div>
-                                            <div class="col-5">
-                                            <span class="text-150 text-success-d3 opacity-2">
-                                                ${{$sale_invoice->sale_payment->total_paid}}
-                                            </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    .text-bold {
+        font-weight: bold;
+    }
+
+    .border {
+        border: 1px solid black;
+    }
+
+    table tr, th, td {
+        border: 1px solid #d2d2d2;
+        border-collapse: collapse;
+        padding: 7px 8px;
+    }
+
+    table tr th {
+        background: #F4F4F4;
+        font-size: 15px;
+    }
+
+    table tr td {
+        font-size: 13px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    .box-text p {
+        line-height: 10px;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .total-part {
+        font-size: 16px;
+        line-height: 12px;
+    }
+
+    .total-right p {
+        padding-right: 20px;
+    }
+</style>
+<body>
+<div class="head-title">
+    <h1 class="text-center m-0 p-0">Invoice</h1>
+</div>
+<div class="add-detail mt-10">
+    <div class="w-50 float-left mt-10">
+        <p class="m-0 pt-5 text-bold w-100">Invoice Id - <span class="gray-color">#{{$sale_invoice->id}}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Order Id - <span class="gray-color">{{$sale_invoice->ref}}</span></p>
+        <p class="m-0 pt-5 text-bold w-100">Order Date - <span class="gray-color">{{$sale_invoice->date}}</span></p>
     </div>
-@endsection
+    <div class="w-50 float-left logo mt-10">
+        <img src="https://www.nicesnippets.com/image/imgpsh_fullsize.png"><span>Maynuddin.com</span>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+<div class="table-section bill-tbl w-100 mt-10">
+    <table class="table w-100 mt-10">
+        <tr>
+            <th class="w-50">Customer Details</th>
+            <th class="w-50">Payment Details</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="box-text">
+                    <p><b>Name : </b>{{$sale_invoice->customer->name}}</p>
+                    <p><b>Email :</b>{{$sale_invoice->customer->email}}</p>
+                    <p><b>Address :</b>{{$sale_invoice->customer->address}}</p>
+                    <p><b>Country :</b> {{$sale_invoice->customer->country_id}}</p>
+                    <p> <b>Phone</b> : {{$sale_invoice->customer->phone}}</p>
+                </div>
+            </td>
+            <td>
+                <div class="box-text">
+                    <p><b>Payment Method :</b>{{$sale_invoice->sale_payment->payment_type->name}}</p>
+                    <p><b>Due            :</b> BDT {{$sale_invoice->sale_payment->total - $sale_invoice->sale_payment->paid}}</p>
+                    <p><b>Total          :</b> BDT {{$sale_invoice->sale_payment->total}}</p>
+                    <p><b>Paid           :</b> BDT {{$sale_invoice->sale_payment->paid}}</p>
+                    <p><b>Deliver Date   :</b></p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="table-section bill-tbl w-100 mt-10">
+    <table class="table w-100 mt-10">
+        <tr>
+            <th class="w-50">Payment Method</th>
+            <th class="w-50">Shipping Method</th>
+        </tr>
+        <tr>
+            <td>{{$sale_invoice->sale_payment->name}}</td>
+            <td>Free Shipping - Free Shipping</td>
+        </tr>
+    </table>
+</div>
+<div class="table-section bill-tbl w-100 mt-10">
+    <table class="table w-100 mt-10">
+        <tr>
+            <th class="w-45">Product Name</th>
+            <th class="w-30">Price</th>
+            <th class="w-30">Qty</th>
+            <th class="w-40">Color</th>
+            <th class="w-40">Size</th>
+            <th class="w-40">Brand</th>
+            <th class="w-40">Sub Total</th>
+        </tr>
+        @forelse($sale_invoice->sale_details as $sale)
+        <tr align="center">
+            <td>{{$sale->product->name}}</td>
+            <td>{{$sale->selling_price}}</td>
+            <td>{{$sale->qty}}</td>
+            <td>{{$sale->color->name}}</td>
+            <td>{{$sale->size->name}}</td>
+            <td>{{$sale->brand->name}}</td>
+            <td>{{$sale->qty * $sale->selling_price }}</td>
+        </tr>
+        @empty
+        @endforelse
+        <tr>
+            <td colspan="7">
+                <div class="total-part">
+                    <div class="total-left w-85 float-left" align="right">
+                        <p>Total</p>
+                        <p>Paid</p>
+                        <p style=" margin-top: 5px;padding-top: 7px">Due</p>
+                    </div>
+                    <div class="total-right w-15 float-left text-bold" align="right">
+                        <p>BDT {{$sale_invoice->sale_payment->total}}</p>
+                        <p>BDT {{$sale_invoice->sale_payment->paid}}</p>
+                        <p style="border-top: 1px solid black; margin-top: 5px;padding-top: 7px">BDT {{$sale_invoice->sale_payment->total - $sale_invoice->sale_payment->paid}}</p>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

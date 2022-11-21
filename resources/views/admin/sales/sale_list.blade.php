@@ -83,12 +83,12 @@
                             </td>
                             <td>{{$sale->created_at->format('d M y')}}</td>
                             <td>{{$sale->customer->name}}</td>
-                            <td>SL0101</td>
-                            <td><span class="badges bg-lightgreen">Completed</span></td>
-                            <td><span class="badges bg-lightgreen">Paid</span></td>
-                            <td>{{$sale->total_paid ?? ''}}</td>
-                            <td>{{$sale->total_paid ?? ''}}</td>
-                            <td class="text-red">0</td>
+                            <td>{{$sale->ref}}</td>
+                            <td><span class="badges bg-lightgreen">Received</span></td>
+                            <td><span class="badges {{$sale->sale_payment->total > $sale->sale_payment->paid ?  'bg-lightred' : 'bg-lightgreen'}} ">{{$sale->sale_payment->total > $sale->sale_payment->paid ? 'Due':'Paid'}}</span></td>
+                            <td>{{$sale->sale_payment->total}}</td>
+                            <td>{{$sale->sale_payment->paid}}</td>
+                            <td class="text-red">{{ $sale->sale_payment->total > $sale->sale_payment->paid ? $sale->sale_payment->total - $sale->sale_payment->paid : ''}}</td>
                             <td>{{$sale->admin ?? 'Admin'}}</td>
                             <td class="text-center">
                                 <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -97,10 +97,15 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{route('admin.sale.invoice',$sale->id)}}"
+                                        <a href="{{route('admin.sale.details',$sale->id)}}"
                                            class="dropdown-item"><img
                                                 src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/eye1.svg"
                                                 class="me-2" alt="img">Sale Detail</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('admin.sale.invoice',$sale->id)}}" class="dropdown-item"><img
+                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/download.svg"
+                                                class="me-2" alt="img">Download pdf</a>
                                     </li>
                                     <li>
                                         <a href="https://dreamspos.dreamguystech.com/laravel/template/public/edit-sales"
@@ -121,11 +126,6 @@
                                                 class="me-2" alt="img">Create Payment</a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);" class="dropdown-item"><img
-                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/download.svg"
-                                                class="me-2" alt="img">Download pdf</a>
-                                    </li>
-                                    <li>
                                         <a href="javascript:void(0);" class="dropdown-item confirm-text"><img
                                                 src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete1.svg"
                                                 class="me-2" alt="img">Delete Sale</a>
@@ -135,68 +135,6 @@
                         </tr>
                         @empty
                         @endforelse
-{{--                        @forelse($sale as $item)--}}
-{{--                            <tr class="odd">--}}
-{{--                                <td class="sorting_1">--}}
-{{--                                    <label class="checkboxs">--}}
-{{--                                        <input type="checkbox">--}}
-{{--                                        <span class="checkmarks"></span>--}}
-{{--                                    </label>--}}
-{{--                                </td>--}}
-{{--                                <td>walk-in-customer</td>--}}
-{{--                                <td>19 Nov 2022</td>--}}
-{{--                                <td>SL0101</td>--}}
-{{--                                <td><span class="badges bg-lightgreen">Completed</span></td>--}}
-{{--                                <td><span class="badges bg-lightgreen">Paid</span></td>--}}
-{{--                                <td>0.00</td>--}}
-{{--                                <td>0.00</td>--}}
-{{--                                <td class="text-red">100.00</td>--}}
-{{--                                <td>Admin</td>--}}
-{{--                                <td class="text-center">--}}
-{{--                                    <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"--}}
-{{--                                       aria-expanded="true">--}}
-{{--                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>--}}
-{{--                                    </a>--}}
-{{--                                    <ul class="dropdown-menu">--}}
-{{--                                        <li>--}}
-{{--                                            <a href="https://dreamspos.dreamguystech.com/laravel/template/public/sales-details"--}}
-{{--                                               class="dropdown-item"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/eye1.svg"--}}
-{{--                                                    class="me-2" alt="img">Sale Detail</a>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <a href="https://dreamspos.dreamguystech.com/laravel/template/public/edit-sales"--}}
-{{--                                               class="dropdown-item"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"--}}
-{{--                                                    class="me-2" alt="img">Edit Sale</a>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal"--}}
-{{--                                               data-bs-target="#showpayment"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/dollar-square.svg"--}}
-{{--                                                    class="me-2" alt="img">Show Payments</a>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <a href="javascript:void(0);" class="dropdown-item" data-bs-toggle="modal"--}}
-{{--                                               data-bs-target="#createpayment"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus-circle.svg"--}}
-{{--                                                    class="me-2" alt="img">Create Payment</a>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <a href="javascript:void(0);" class="dropdown-item"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/download.svg"--}}
-{{--                                                    class="me-2" alt="img">Download pdf</a>--}}
-{{--                                        </li>--}}
-{{--                                        <li>--}}
-{{--                                            <a href="javascript:void(0);" class="dropdown-item confirm-text"><img--}}
-{{--                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete1.svg"--}}
-{{--                                                    class="me-2" alt="img">Delete Sale</a>--}}
-{{--                                        </li>--}}
-{{--                                    </ul>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @empty--}}
-{{--                        @endforelse--}}
                         </tbody>
                     </table>
                     <div class="dataTables_length" id="DataTables_Table_0_length"><label><select

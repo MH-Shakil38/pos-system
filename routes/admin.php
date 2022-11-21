@@ -31,10 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['prefix'=>'purchase','as'=>'admin.'], function(){
         Route::resource('/purchase',PurchaseController::class,['name'=>'purchase']);
+        Route::post('/purchase-card','\App\Http\Controllers\admin\PurchaseController@purchase_card')->name('add-purchase-card');
+        Route::get('/purchase-details/{id}','\App\Http\Controllers\admin\PurchaseController@purchase_details')->name('purchase.details');
+        Route::get('/invoice/{id}','\App\Http\Controllers\admin\PdfController@purchase_invoice')->name('purchase.invoice');
     });
     Route::group(['prefix'=>'sale','as'=>'admin.'], function(){
-        Route::get('invoice/{id}','\App\Http\Controllers\admin\SaleController@invoice')->name('sale.invoice');
+        Route::get('details/{id}','\App\Http\Controllers\admin\SaleController@sale_details')->name('sale.details');
         Route::post('product','\App\Http\Controllers\admin\SaleController@addSale')->name('add-product');
+        Route::get('/invoice/{id}','\App\Http\Controllers\admin\PdfController@sale_invoice')->name('sale.invoice');
         Route::resource('/sale',SaleController::class,['name'=>'sale']);
     });
     Route::group(['prefix'=>'customer','as'=>'admin.'], function(){

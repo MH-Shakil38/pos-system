@@ -1,17 +1,19 @@
 @extends('admin.layouts.master')
 @section('content')
+
     <div class="page-header">
         <div class="page-title">
             <h4>PURCHASE LIST</h4>
             <h6>Manage your purchases</h6>
         </div>
         <div class="page-btn">
-            <a href="{{route('admin.purchase.create')}}" class="btn btn-added">
+            <a href="https://dreamspos.dreamguystech.com/laravel/template/public/addpurchase" class="btn btn-added">
                 <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
                      alt="img">Add New Purchases
             </a>
         </div>
     </div>
+
     <div class="card">
         <div class="card-body">
             <div class="table-top">
@@ -84,8 +86,8 @@
                                                data-select2-id="2" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                            aria-disabled="false" aria-labelledby="select2-p0qc-container"><span
-                                                class="select2-selection__rendered" id="select2-p0qc-container"
+                                            aria-disabled="false" aria-labelledby="select2-l0z5-container"><span
+                                                class="select2-selection__rendered" id="select2-l0z5-container"
                                                 role="textbox" aria-readonly="true" title="Choose Supplier">Choose Supplier</span><span
                                                 class="select2-selection__arrow" role="presentation"><b
                                                     role="presentation"></b></span></span></span><span
@@ -102,8 +104,8 @@
                                                data-select2-id="5" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                            aria-disabled="false" aria-labelledby="select2-k88e-container"><span
-                                                class="select2-selection__rendered" id="select2-k88e-container"
+                                            aria-disabled="false" aria-labelledby="select2-ms6r-container"><span
+                                                class="select2-selection__rendered" id="select2-ms6r-container"
                                                 role="textbox" aria-readonly="true"
                                                 title="Choose Status">Choose Status</span><span
                                                 class="select2-selection__arrow" role="presentation"><b
@@ -121,8 +123,8 @@
                                                data-select2-id="8" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0"
-                                            aria-disabled="false" aria-labelledby="select2-frlj-container"><span
-                                                class="select2-selection__rendered" id="select2-frlj-container"
+                                            aria-disabled="false" aria-labelledby="select2-b0ib-container"><span
+                                                class="select2-selection__rendered" id="select2-b0ib-container"
                                                 role="textbox" aria-readonly="true" title="Choose Payment Status">Choose Payment Status</span><span
                                                 class="select2-selection__arrow" role="presentation"><b
                                                     role="presentation"></b></span></span></span><span
@@ -147,99 +149,87 @@
                         <thead>
                         <tr>
                             <th class="sorting sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1"
-                                colspan="1" aria-sort="ascending" aria-label=" : activate to sort column descending"
-                                style="width: 35px;">
+                                colspan="1" aria-sort="ascending" aria-label="
+
+
+
+
+: activate to sort column descending" style="width: 47.2375px;">
                                 <label class="checkboxs">
                                     <input type="checkbox" id="select-all">
                                     <span class="checkmarks"></span>
                                 </label>
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Supplier Name: activate to sort column ascending" style="width: 106.328px;">
-                                Product Name
+                                aria-label="Supplier Name: activate to sort column ascending" style="width: 130.2px;">
+                                Supplier Name
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Reference: activate to sort column ascending" style="width: 63.625px;">
-                               Supplier Name
+                                aria-label="Reference: activate to sort column ascending" style="width: 80.525px;">
+                                Reference
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Date: activate to sort column ascending" style="width: 63.0781px;">Category
+                                aria-label="Date: activate to sort column ascending" style="width: 79.8875px;">Date
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Date: activate to sort column ascending" style="width: 63.0781px;">Color
+                                aria-label="Status: activate to sort column ascending" style="width: 76.3125px;">Status
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Status: activate to sort column ascending" style="width: 60px;">Size
+                                aria-label="Grand Total: activate to sort column ascending" style="width: 93.9625px;">
+                                Grand Total
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Grand Total: activate to sort column ascending" style="width: 75.1719px;">
-                                Quantity
+                                aria-label="Paid: activate to sort column ascending" style="width: 38.925px;">Paid
                             </th>
-{{--                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"--}}
-{{--                                aria-label="Due: activate to sort column ascending" style="width: 26px;">Due--}}
-{{--                            </th>--}}
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                aria-label="Due: activate to sort column ascending" style="width: 36.7625px;">Due
+                            </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                 aria-label="Payment Status: activate to sort column ascending"
-                                style="width: 101.047px;">Price
+                                style="width: 124.062px;">Payment Status
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Action: activate to sort column ascending" style="width: 50.8906px;">Action
+                                aria-label="Action: activate to sort column ascending" style="width: 71.325px;">Action
                             </th>
                         </tr>
                         </thead>
                         <tbody>
 
-                    @forelse($purchases as $item)
-                        <tr class="odd">
-                            <td class="sorting_1">
-                                <label class="checkboxs">
-                                    <input type="checkbox">
-                                    <span class="checkmarks"></span>
-                                </label>
-                            </td>
-                            <td class="text-bolds">{{$item->product->name}}</td>
-                            <td>{{$item->supplier->name}}</td>
-                            <td>{{$item->purchase_detail->category->name}}</td>
-                            <td>{{$item->purchase_detail->color->name}}</td>
-                            <td>{{$item->purchase_detail->size->name}}</td>
-                            <td>{{$item->qty}}</td>
-                            <td>{{$item->price}}</td>
-                            <td>
-                                <a class="me-3"
-                                   href="https://dreamspos.dreamguystech.com/laravel/template/public/editpurchase">
-                                    <img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
-                                        alt="img">
-                                </a>
-                                <a class="me-3 confirm-text" href="javascript:void(0);">
-                                    <img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
-                                        alt="img">
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                    @endforelse
+                        @forelse($purchases as $row)
+                            <tr class="odd">
+                                <td class="sorting_1">
+                                    <label class="checkboxs">
+                                        <input type="checkbox">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </td>
+                                <td class="text-bolds">[{{$loop->iteration}}] {{$row->supplier->name}}</td>
+                                <td>{{$row->ref}}</td>
+                                <td>{{$row->date}}</td>
+                                <td><span class="badges bg-lightgreen">Received</span></td>
+                                <td>{{$row->purchase_payment->total}}</td>
+                                <td>{{$row->purchase_payment->paid ?? 'null'}}</td>
+                                <td>{{$row->purchase_payment->due ?? 'null'}}</td>
+                                <td><span class="badges {{$row->purchase_payment->total > $row->purchase_payment->paid ? 'bg-lightred' : 'bg-lightgreen'}}">{{$row->purchase_payment->total > $row->purchase_payment->paid ? 'due' : 'paid'}}</span></td>
+                                <td>
+                                    <a class="me-3"
+                                       href="{{route('admin.purchase.details',$row->id)}}">
+                                        <img
+                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
+                                            alt="img">
+                                    </a>
+                                    <a class="me-3 confirm-text" href="javascript:void(0);">
+                                        <img
+                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
+                                            alt="img">
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                        @endforelse
                         </tbody>
                     </table>
-                    <div class="dataTables_length" id="DataTables_Table_0_length"><label><select
-                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
-                                class="custom-select custom-select-sm form-control form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select></label></div>
-                    <div class="dataTables_paginate paging_numbers" id="DataTables_Table_0_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0"
-                                                                            data-dt-idx="0" tabindex="0"
-                                                                            class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0"
-                                                                      data-dt-idx="1" tabindex="0"
-                                                                      class="page-link">2</a></li>
-                        </ul>
-                    </div>
+
                     <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">1 - 10 of
                         14 items
                     </div>
@@ -247,4 +237,5 @@
             </div>
         </div>
     </div>
+
 @endsection

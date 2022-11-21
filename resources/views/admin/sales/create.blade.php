@@ -9,6 +9,7 @@
             <h6>Add your new sale</h6>
         </div>
     </div>
+    {{ Form::open(['route'=>['admin.sale.store'],"method"=>"POST","files"=>true]) }}
     <div class="row">
         <div class="col-md-8 col-lg-8 col-sm-12">
             <div class="card">
@@ -17,23 +18,47 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <label for="">Customer</label>
-                        <div class="col-lg-6 col-sm-6 col-md-6 col-6 ps-0">
-                            <div class="form-group">
-                                {!! Form::select('customer_id',$customers,null, ['class'=>'form-control select2','placeholder'=>'Select Customer','id'=>'customer_id','onchange'=>'customer(this)']) !!}
+                        <div class="col-lg-6 col-sm-6 col-md-6 col-6 mt-1">
+                            <label for="">Customer</label>
+                            <div class="row">
+                                <div class="col-md-10 col-sm-10 col-lg-10 col-10">
+                                    <div class="form-group">
+                                        {!! Form::select('customer_id',$customers,null, ['class'=>'form-control select2','placeholder'=>'Select Customer','id'=>'customer_id','onchange'=>'customer(this)']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-1 col-sm-1 col-1 ps-0">
+                                    <div class="add-icon">
+                                        <a href="{{route('admin.customer.create')}}" target="_blank"><span><img
+                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus1.svg"
+                                                    alt="img"></span></a>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-2 ps-0">
-                            <div class="add-icon">
-                                <a href="{{route('admin.customer.create')}}" target="_blank"><span><img
-                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus1.svg"
-                                            alt="img"></span></a>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="">Order Date</label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker" name="order_date" value="{{date(now())}}">
+                                    <div class="addonset">
+                                        <img
+                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
+                                            alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <div class="form-group">
+                                <label for="">Ref</label>
+                                <input type="text" name="ref" value="{{'SL'.rand(0,9999)}}">
                             </div>
                         </div>
                     </div>
-                    <hr>
                     <div class="row">
-                        <div class="col-lg-4 col-sm-2 col-md-2 col-12 ps-0">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-12">
                             <div class="form-group">
                                 <label for="">Product</label>
                                 <select id="product_id" name="product_id" class="form-control select2"
@@ -47,43 +72,86 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12">
+                            <div class="form-group">
+                                <label for="">Brand</label>
+                                {!! Form::select(null,$brands,Null, ['class'=>'form-control select2','placeholder'=>'brand','id'=>'brand_id']) !!}
 
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-12 ps-0">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12 ps-0">
+                            <div class="form-group">
+                                <label for="">Color</label>
+                                {!! Form::select(null,$colors,Null, ['class'=>'form-control select2','placeholder'=>'color','id'=>'color_id']) !!}
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12 ps-0">
+                            <div class="form-group">
+                                <label for="">Size</label>
+                                {!! Form::select(null,$sizes,Null, ['class'=>'form-control select2','placeholder'=>'size','id'=>'size_id']) !!}
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12">
                             <div class="form-group">
                                 <label for="">Price</label>
                                 <input id="disable_price" class="form-control" disabled type="number" value="">
-                                <input id="price" name="price" class="form-control" type="hidden" value="">
+                                <input id="price" class="form-control" type="hidden" value="">
                             </div>
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-12 ps-0">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12 ps-0">
                             <div class="form-group">
                                 <label for="">Qty</label>
                                 <input id="qty" name="qty" type="text" disabled="true">
                             </div>
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-12 ps-0">
+                        <div class="col-lg-4 col-sm-4 col-md-4 col-12 ps-0">
                             <div class="form-group">
                                 <label for="">SubTotal</label>
                                 <input value="" id="disablesubtotal" disabled="true" class="form-control">
                                 <input type="hidden" value="" id="subtotal" disabled="true">
                             </div>
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 col-12 ps-0">
+                        <div class="row text-end">
                             <div class="form-group">
-                                <label for="">Action</label>
-                                <div class="add-icon" id="add-product">
-                                    <a class="btn p-0" id="add-product">
-                                        <span>
-                                            <img
-                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus1.svg"
-                                                alt="img">
-                                        </span>
+                                <div id="add-product">
+                                    <a class="btn btn-info" id="add-product">
+                                        Add Sale Card
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="append-row"></div>
+                    <div id=""></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>QTY</th>
+                            <th>Brand</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Price</th>
+                            <th class="text-end">Sub Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="append-row" class="append-row">
+                        <td colspan="11"><h3 class="text-center">Record Not found</h3></td>
+
+                        </tbody>
+                        <tr>
+                            <td colspan="6"class="text-end"><h4>Grand Total :</h4></td>
+                            <td colspan="4" class="text-center"><h5 id="total">৳ 0</h5></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -94,7 +162,6 @@
                             Payments</h2></div>
                 </div>
                 <div class="card-body">
-                    {{ Form::open(['route'=>['admin.sale.store'],"method"=>"POST","files"=>true]) }}
                     <div class="box-2">
                         <div class="box-inner-2">
                             <form action="">
@@ -104,6 +171,13 @@
                                             <p class="fw-bold">Payment Details</p>
                                             <div class="mb-3" id="append-customer">
 
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex flex-column dis">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <strong class="float-left">Total</strong>
+                                                    <p class="fw-bold">৳ <span class="grand-total"></span></p>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="address">
@@ -116,12 +190,26 @@
                                                 <textarea name="note" id="" cols="30" rows="2"
                                                           class="form-control"></textarea>
                                             </div>
-                                            <hr>
-                                            <div class="d-flex flex-column dis">
-                                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                                    <strong class="float-left">Total</strong>
-                                                    <p class="fw-bold">$<span class="grand-total"></span></p>
+                                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="">Date</label>
+                                                    <div class="input-groupicon">
+                                                        <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker" name="deliver_date" value="{{date(now())}}">
+                                                        <div class="addonset">
+                                                            <img
+                                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
+                                                                alt="img">
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-lg-12 col-sm-12 col-md-12 col-12 ps-0">
+                                                <label for="">Paid Amount</label>
+                                                <div class="form-group">
+                                                    <input type="number" name="total_paid" class="text-end form-control">
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-column dis">
                                                 <button class="btn btn-primary mt-2">Order
                                                 </button>
                                             </div>
@@ -131,12 +219,12 @@
                             </form>
                         </div>
                     </div>
-                    {{ Form::close() }}
+
                 </div>
             </div>
         </div>
     </div>
-
+    {{ Form::close() }}
 @endsection
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -187,6 +275,7 @@
                     $('#append-row').html(res.success)
                     $('#append-customer').html(res.customer)
                     $('.grand-total').html(res.total)
+                    $('#total').html(res.total)
                 }
             })
 
@@ -203,6 +292,10 @@
             var product_id = $('#product_id').val();
             var qty = $('#qty').val();
             var customer_id = $('#customer_id').val();
+            var brand_id = $('#brand_id').val();
+            var color_id = $('#color_id').val();
+            var size_id = $('#size_id').val();
+            var selling_price = $('#price').val();
             if (qty > 0) {
                 $.ajax({
                     url: "{{route('admin.add-product')}}",
@@ -210,13 +303,17 @@
                     data: {
                         _token: '{{ csrf_token() }}',
                         'product_id': product_id,
+                        'brand_id': brand_id,
+                        'color_id': color_id,
+                        'size_id': size_id,
                         'qty': qty,
                         'customer_id': customer_id,
+                        'selling_price':selling_price,
                     },
                     success: function (res) {
                         $('#append-row').prepend(res.success)
                         $('.grand-total').html(res.total)
-                        $('#totalpirce').html(res.total)
+                        $('#total').html(res.total)
                         if (res.alertMessage) {
                             alert(res.alertMessage)
                         }

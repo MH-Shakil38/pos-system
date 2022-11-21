@@ -16,20 +16,23 @@ return new class extends Migration
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('purchase_id');
+            $table->unsignedBigInteger('product_id');
             $table->double('qty');
-            $table->string('picture')->nullable();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('brand_id');
-            $table->unsignedBigInteger('color_id');
-            $table->unsignedBigInteger('origin_id');
-            $table->unsignedBigInteger('size_id');
-
-            $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
-            $table->foreign('origin_id')->references('id')->on('origins')->onDelete('cascade');
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
-            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('color_id')->nullable();
+            $table->unsignedBigInteger('origin_id')->nullable();
+            $table->unsignedBigInteger('size_id')->nullable();
+            $table->double('purchase_price')->nullable();
+            $table->double('total')->nullable();
+            $table->double('selling_price')->nullable();
+            $table->foreign('purchase_id')->references('id')->on('purchases');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('brand_id')->references('id')->on('brands');
+            $table->foreign('origin_id')->references('id')->on('origins');
+            $table->foreign('color_id')->references('id')->on('colors');
+            $table->foreign('size_id')->references('id')->on('sizes');
 
             $table->softDeletes();
             $table->timestamps();

@@ -10,9 +10,12 @@ class Sale extends Model
     use HasFactory;
     protected $table = 'sales';
     protected $fillable = [
+        'ref',
         'customer_id',
         'note',
         'status',
+        'order_date',
+        'deliver_date',
         'created_by',
     ];
     public function customer(){
@@ -24,4 +27,5 @@ class Sale extends Model
     public function sale_payment(){
        return $this->hasOne(SalePayment::class);
     }
+
 }

@@ -11,10 +11,13 @@ class PurchasePayment extends Model
     use HasFactory;
     protected $table = 'purchase_payments';
     protected $fillable = [
+        'purchase_id',
         'payment_type_id',
-        'purchase_details_id',
-        'total_price',
-        'selling_price'
+        'total',
+        'paid',
+        'due',
+        'status',
+        'note',
     ];
     public function payment_types(){
         return $this->belongsTo(PaymentType::class);

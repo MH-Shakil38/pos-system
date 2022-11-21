@@ -15,6 +15,10 @@ class SaleCard extends Model
       'customer_id',
       'product_id',
       'qty',
+      'brand_id',
+      'color_id',
+      'size_id',
+      'selling_price',
       'total_price',
     ];
     public function customer()
@@ -23,5 +27,14 @@ class SaleCard extends Model
     }
     public function product(){
         return $this->belongsTo(Product::class);
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+    public function color(){
+        return $this->belongsTo(Color::class);
+    }
+    public function size(){
+        return $this->belongsTo(Size::class);
     }
 }
