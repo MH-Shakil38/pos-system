@@ -16,6 +16,7 @@ trait PurchaseTrait
         $purchase = Purchase::query()->create($purchase_data);
         return $purchase;
     }
+
     public static function storePurhcaseDetails($data,$ref){
         $data['purchase_details'] = $data;
         $purchase_details_data = array_merge(['purchase_id'=>$ref],$data['purchase_details']);

@@ -58,14 +58,15 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        $data['products']   = Product::query()->orderByDesc('id')->pluck('name','id');
-        $data['suppliers']  = Supplier::query()->orderByDesc('id')->pluck('name','id');
-        $data['categories']  = Category::query()->orderByDesc('id')->pluck('name','id');
-        $data['brands']  = Brand::query()->orderByDesc('id')->pluck('name','id');
-        $data['sizes']  = Size::query()->orderByDesc('id')->pluck('name','id');
-        $data['colors']  = Color::query()->orderByDesc('id')->pluck('name','id');
+        $data['products']      = Product::getAll(true);
+        $data['suppliers']     = Supplier::getAll(true);
+        $data['categories']    = Category::getAll(true);
+        $data['brands']        = Brand::getAll(true);
+        $data['sizes']         = Size::query()->orderByDesc('id')->pluck('name','id');
+        $data['colors']        = Color::query()->orderByDesc('id')->pluck('name','id');
         $data['paymentTypes']  = PaymentType::query()->orderByDesc('id')->pluck('name','id');
-        $data['origins']  = Origin::query()->orderByDesc('id')->pluck('name','id');
+        $data['origins']       = Origin::query()->orderByDesc('id')->pluck('name','id');
+
         return view('admin.purchase.manage-purchase')->with($data);
     }
 

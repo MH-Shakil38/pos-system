@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConfigurationRequest;
 use App\Models\Brand;
 use App\Repository\ConfigurationRepository;
+use App\Service\TableName;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $data["brands"] = Brand::query()->get();
+        $data["brands"] = Brand::getAll();
         return view('admin.configuration.brand')->with($data);
     }
 
@@ -43,15 +44,20 @@ class BrandController extends Controller
     public function store(ConfigurationRequest $request)
     {
         $data['request'] = $request->validated();
+
         try {
             DB::beginTransaction();
-            $table_name = 'Brand';
+
+            $table_name = TableName::BRAND;
             $brand = $this->repository::storeConfig($table_name, $data);
+
             if($request->hasFile("thumbnail")){
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::BRAND_LOGO,429,500);
                 $brand->update(["thumbnail"=>$data["thumbnail"]]);
             }
+
             DB::commit();
+
             return redirect()->back()->with('success','Brand Successfully Inserted');
         }
         catch (\Throwable $e){
@@ -88,8 +94,8 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $data['brand'] = Brand::findOrFail($id);
-        $data["brands"] = Brand::query()->get();
+        $data['brand'] = Brand::findById($id);
+        $data["brands"] = Brand::getAll();
         return view('admin.configuration.brand')->with($data);
     }
 
@@ -102,19 +108,26 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data['request'] = $request->validate([
+        $data = $request->validate([
             'name'=>['required',Rule::unique('brands')->ignore($id)],
             'description'=>'nullable'
         ]);
+
         try {
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
-            $data = array_merge($data['value'],$data['request']);
+
+            $brand =  Brand::findById($id);
+
+            $data['slug'] = Str::slug($request->name);
+
             if($request->hasFile("thumbnail")){
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::BRAND_LOGO,429,400);
             }
-            $brand = Brand::findOrFail($id)->update($data);
+
+            $brand->update($data);
+
             DB::commit();
+
             return redirect()->route('admin.brand.index')->with('success','Brand Successfully Updated');
         }
         catch (\Throwable $e){

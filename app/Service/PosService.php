@@ -14,4 +14,10 @@ class PosService
     const PRODUCT_IMAGE            =  self::DEFAULT_DIRECTORY."/product/image/";
     const CUSTOMER_IMAGE            =  self::DEFAULT_DIRECTORY."/customer/";
 
+
+    public static function userID()
+    {
+        return auth()->id();
+    }
+
 }

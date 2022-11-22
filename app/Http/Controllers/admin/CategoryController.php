@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ConfigurationRequest;
 use App\Models\Category;
 use App\Repository\ConfigurationRepository;
+use App\Service\TableName;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +32,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data["categories"] = Category::query()->with('user')->get();
-        $data["categories_orderBy"] = Category::query()->orderBy('name')->get();
+        $data["categories"] = Category::getAll();
+        $data["categories_orderBy"] = Category::getAll(false, "name");
+
         return view('admin.configuration.category')->with($data);
     }
 
@@ -57,7 +59,7 @@ class CategoryController extends Controller
         $data['request'] = $request->validated();
         try {
             DB::beginTransaction();
-            $table_name = 'Category';
+            $table_name = TableName::CATEGORY;
             $category = $this->repository::storeConfig($table_name, $data);
 
             if($request->hasFile("thumbnail")){
@@ -102,9 +104,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data['category'] = Category::findOrFail($id);
-        $data["categories"] = Category::query()->get();
-        $data["categories_orderBy"] = Category::query()->orderBy('name')->get();
+        $data['category']           = Category::findById($id);
+        $data["categories"]         = Category::getAll();
+        $data["categories_orderBy"] =  Category::getAll(false,"name");
+
         return view('admin.configuration.category')->with($data);
     }
 
@@ -123,14 +126,21 @@ class CategoryController extends Controller
             'description'=>'nullable',
         ]);
         try {
+            $category = Category::findById($id);
+
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
+
+            $data['value'] = ['slug' =>  Str::slug($request->name)];
             $data = array_merge($data['value'],$data['request']);
-            if($request->hasFile("thumbnail")){
+
+            if($request->hasFile("thumbnail"))
+            {
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::CATEGORY_IMAGE,429,500,"storage/project_files /category/");
             }
-            $category = Category::findOrFail($id)->update($data);
+            $category->update($data);
+
             DB::commit();
+
             return redirect()->route('admin.category.index')->with('success','Category Successfully Inserted');
         }
         catch (\Throwable $e){
@@ -154,7 +164,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findById($id);
         $deleteImage = $category->image;
         if (file_exists($deleteImage)){
             File::Delete($deleteImage);

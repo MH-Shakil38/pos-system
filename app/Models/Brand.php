@@ -17,4 +17,38 @@ class Brand extends Model
             'description',
             'created_by',
         ];
+
+
+    /**
+     * Automatic created_by value assigned from logged in user
+     * */
+
+    protected static function boot(){
+        parent::boot();
+
+        static::creating(function ($query){
+            $query->created_by = auth()->id();
+        });
+    }
+
+    /**
+     * Repository Methods
+     * */
+
+    public static function getAll($is_pluck =false)
+    {
+        $query = self::query();
+        $query->latest();
+
+        return $is_pluck ? $query->pluck("name","id") : $query->cursor();
+    }
+
+
+    public static function findById($id)
+    {
+
+        return self::query()->findOrFail($id);
+    }
+
+
 }
