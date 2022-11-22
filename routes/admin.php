@@ -44,4 +44,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix'=>'customer','as'=>'admin.'], function(){
         Route::resource('/customer',CustomerController::class,['name'=>'customer']);
     });
+    Route::group(['prefix'=>'report','as'=>'admin.'], function(){
+        Route::get('/customer-report','\App\Http\Controllers\admin\ReportController@customer_report')->name('report.customer');
+        Route::get('/supplier-report','\App\Http\Controllers\admin\ReportController@supplier_report')->name('report.supplier');
+        Route::get('/sale-report','\App\Http\Controllers\admin\ReportController@sale_report')->name('report.sale');
+    });
+    Route::get('/update',function (){
+        return 'hello';
+    });
 });

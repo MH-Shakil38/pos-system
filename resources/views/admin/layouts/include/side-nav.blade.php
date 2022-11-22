@@ -118,14 +118,14 @@
                             alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a class=""
-                               href="#">Customer Report</a></li>
+                               href="{{route('admin.report.customer')}}">Customer Report</a></li>
                         <li><a class=""
-                               href="#">Supplier Report</a></li>
+                               href="{{route('admin.report.supplier')}}">Supplier Report</a></li>
                         <li><a class=""
-                               href="#">Sale Report</a></li>
-                        {{--                        <li><a class=""--}}
-                        {{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New--}}
-                        {{--                                Sales Return</a></li>--}}
+                              href="{{route('admin.report.sale')}}">Sale Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New
+                                Sales Return</a></li>
                     </ul>
                 </li>
                 <li class="submenu">

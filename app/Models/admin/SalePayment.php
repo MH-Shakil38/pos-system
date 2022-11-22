@@ -15,6 +15,7 @@ class SalePayment extends Model
         'payment_type_id',
         'total',
         'paid',
+        'due',
     ];
     public function sale(){
         return $this->belongsTo(Sale::class);

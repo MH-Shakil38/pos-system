@@ -48,4 +48,20 @@ class PurchaseDetails extends Model
     public function size(){
         return $this->belongsTo(Size::class);
     }
+    public static function storePurchaseDetails($purchase, $card)
+    {
+        return self::query()->create([
+        "purchase_id"       => $purchase->id,
+        "product_id"        => $card->product_id,
+        "qty"               => $card->qty,
+        "category_id"       => $card->category_id,
+        "brand_id"          => $card->brand_id,
+        "color_id"          => $card->color_id,
+        "size_id"           => $card->size_id,
+        "origin_id"         => $card->origin_id,
+        "purchase_price"    => $card->purchase_price,
+        "selling_price"     => $card->selling_price,
+        "total"             => $card->total,
+        ]);
+    }
 }

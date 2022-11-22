@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('sale_id');
             $table->unsignedBigInteger('payment_type_id');
-            $table->unsignedDouble('total_paid');
+            $table->unsignedDouble('total');
+            $table->unsignedDouble('paid');
+            $table->unsignedDouble('due');
             $table->timestamps();
         });
     }

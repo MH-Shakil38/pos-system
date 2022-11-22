@@ -91,6 +91,7 @@ class SaleController extends Controller
                     'ref' => $request->ref]);
                 $sale_card = SaleCard::query()->where('customer_id', $request->customer_id)->get();
                 $totalPrice = SaleCard::query()->where('customer_id', $request->customer_id)->sum('total_price');
+                $totalDue = $totalPrice - $request->paymentType;
                 foreach ($sale_card as $key => $card) {
                     $sd = new SaleDetalis();
                     $sd->sale_id = $sale->id;
@@ -110,6 +111,7 @@ class SaleController extends Controller
                     'payment_type_id' => $request->paymentType,
                     'total' => $totalPrice,
                     'paid' => $request->total_paid,
+                    'due' => $totalPrice - $request->paymentType,
                 ]);
 
                 DB::commit();

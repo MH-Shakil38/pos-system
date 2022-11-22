@@ -87,22 +87,11 @@ class PurchaseController extends Controller
             $purchase->created_by = Auth::user()->id;
             $purchase->save();
             $purchase->update(['ref'=>'PT00'.$purchase->id]);
-
             $purchase_card = PurchaseCard::query()->where('supplier_id', $request->supplier_id)->get();
-            foreach ($purchase_card as $card) {
-                $details = new PurchaseDetails();
-                $details->purchase_id = $purchase->id;
-                $details->product_id = $card->product_id; //$purhcase->id;
-                $details->qty = $card->qty; //$purhcase->id;
-                $details->category_id = $card->category_id;
-                $details->brand_id = $card->brand_id;
-                $details->color_id = $card->color_id;
-                $details->size_id = $card->size_id;
-                $details->origin_id = $card->origin_id;
-                $details->purchase_price = $card->purchase_price;
-                $details->selling_price = $card->selling_price;
-                $details->total = $card->total;
-                $details->save();
+
+
+            foreach ($purchase_card as $key => $card) {
+                PurchaseDetails::storePurchaseDetails($purchase, $card);
                 $card->delete();
             }
             $card_total = PurchaseDetails::query()->where('purchase_id', $purchase->id)->sum('total');
