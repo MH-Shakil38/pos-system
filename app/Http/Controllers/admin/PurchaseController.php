@@ -27,8 +27,8 @@ use App\Repository\PurchaseRepository;
 class PurchaseController extends Controller
 {
     public $repositoy;
-    public function __construct(){
-        $this->repositoy = new PurchaseRepository();
+    public function __construct(PurchaseRepository $repository){
+        $this->repositoy = $repository;
     }
     use PosTrait;
     use PurchaseTrait;
@@ -73,37 +73,33 @@ class PurchaseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
 
-            $purchase = new Purchase();
-            $purchase->supplier_id = $request->supplier_id;
-            $purchase->status = $request->status;
-            $purchase->date = $request->date;
-            $purchase->created_by = Auth::user()->id;
-            $purchase->save();
-            $purchase->update(['ref'=>'PT00'.$purchase->id]);
+//          store purchase
+            $purchaseData = $request->only(['supplier_id','status','date']);
+            $purchase = Purchase::storePurchase($purchaseData ,Auth::user()->id);
+
+//          purchase details store from purchase card, and clear card data
             $purchase_card = PurchaseCard::query()->where('supplier_id', $request->supplier_id)->get();
-
-
             foreach ($purchase_card as $key => $card) {
+
+//              add purchase details from purchase card to purchase details
                 PurchaseDetails::storePurchaseDetails($purchase, $card);
+
+//              delete purchase card record after creating purchase details
                 $card->delete();
             }
-            $card_total = PurchaseDetails::query()->where('purchase_id', $purchase->id)->sum('total');
-            $purchase_payment = PurchasePayment::create([
-                'purchase_id' => $purchase->id,
-                'payment_type_id' => 1,
-                'total' => $card_total,
-                'paid' => $request->paid,
-                'due' => $card_total-$request->paid,
-//                'status' => $card_total > $request->paid ? 'due' : 'paid',
-                'note' => $request->note,
-            ]);
+
+//          Store purchase payment
+            $paymentData = $request->only(['paid','note','payment_type_id']);
+
+            PurchasePayment::storePurchasePayment($purchase, $paymentData);
+
             DB::commit();
             return redirect()->route('admin.purchase.details', $purchase->id);
         }
@@ -186,11 +182,7 @@ class PurchaseController extends Controller
      * @param  \App\Models\Purches  $purches
      * @return \Illuminate\Http\Response
      */
-    public function show(Purches $purches)
-    {
-        return 'show';
 
-    }
     public function purchase_details($id){
         $data['purchase'] = Purchase::query()->where('id',$id)->with(['supplier','purchase_details','purchase_payment'])->first();
         $data['total'] = PurchaseDetails::query()->where('purchase_id',$id)->sum('total');
@@ -223,73 +215,36 @@ class PurchaseController extends Controller
 
     }
     public function purchase_card(Request $request){
-        /*
-         * query supplier old data
-         */
-//        dd($request->all());
-        if (isset($request->old_data) && isset($request->supplier)){
 
-            $purchase = PurchaseCard::query()->where('supplier_id',$request->supplier)->with(['product','brand','category','color','size','origin','supplier'])->get();
-            $html_data = '';
-            foreach ($purchase as $card){
-                $html_data.='
-                            <tr>
-                                <td class="productimgname">
-                                    <a class="product-img">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product7.jpg" alt="product">
-                                    </a>
-                                    <a href="javascript:void(0);">'.$card->product->name.'</a>
-                                </td>
-                                <td >'.$card->qty.'</td>
-                                <td>'.$card->category->name.'</td>
-                                <td>'.$card->brand->name.'</td>
-                                <td>'.$card->color->name.'</td>
-                                <td>'.$card->size->name.'</td>
-                                <td>'.$card->origin->name.'</td>
-                                <td ><span>৳ '.$card->purchase_price.'</span></td>
-                                <td ><span>৳ '.$card->selling_price.'</span></td>
-                                <td class="text-end"> <span>৳ '.$card->total.'</span></td>
-                                <td>
-                                    <a class="delete-set"><img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg" alt="svg"></a>
-                                </td>
-                            </tr>';
-            }
+//      query supplier old data from card
+        if (isset($request->old_data) && isset($request->supplier)){
+            $purchase = $this->repositoy::supplierOldData($request->supplier);
             $grand_total = PurchaseCard::query()->where('supplier_id',$request->supplier)->sum('total');
-            return response()->json(['success'=>$html_data,'grand_total'=>$grand_total]);
+            return response()->json(['success'=>$purchase,'grand_total'=>$grand_total]);
         }
+//      add supplier recent data and append row in front
         if (isset($request->product_id) && isset($request->supplier_id)) {
             $data['request'] = $request->all();
             $data['total'] = ['total' => $request->qty * $request->purchase_price];
+
+//          marg request data and total for store card data at a time
             $data = array_merge($data['request'], $data['total']);
+
+//          store purchase data in purchase card
             $purchase_card = PurchaseCard::query()->create($data);
+
+//          query last add card data, for append row in show table row
             $card = PurchaseCard::query()->where('id',$purchase_card->id)->with(['product','brand','category','color','size','origin','supplier'])->first();
-            $html_data = '';
-            $html_data .= '
-        <tr>
-            <td class="productimgname">
-                <a class="product-img">
-                    <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product7.jpg" alt="product">
-                </a>
-                <a href="javascript:void(0);">' . $card->product->name . '</a>
-            </td>
-            <td >' . $card->qty . '</td>
-            <td>' . $card->category->name . '</td>
-            <td>' . $card->brand->name . '</td>
-            <td>' . $card->color->name . '</td>
-            <td>' . $card->size->name . '</td>
-            <td>' . $card->origin->name . '</td>
-            <td><span>৳ '.$card->purchase_price.'</span></td>
-            <td><span>৳ '.$card->selling_price.'</span></td>
-            <td class="text-end">৳ ' . $card->total . '<span></span></td>
-            <td>
-                <a class="delete-set"><img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg" alt="svg"></a>
-            </td>
-        </tr>';
+
+//          create table rew with last created purchase card data for append table row
+            $html_data = $this->repositoy::appendSupplierRow($card);
+
+//          query total amount this supplier
             $grand_total = PurchaseCard::query()->where('supplier_id',$request->supplier_id)->sum('total');
+
             return response()->json(['card_row' => $html_data,'grand_total'=>$grand_total]);
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *

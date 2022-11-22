@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConfigurationRequest;
 use App\Models\PaymentType;
+use App\Repository\ConfigurationRepository;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,10 +18,15 @@ use PhpParser\Node\Stmt\Return_;
 class PaymentTypeController extends Controller
 {
     use PosTrait;
+    protected $repository;
+    public function __construct(ConfigurationRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -31,19 +38,15 @@ class PaymentTypeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ConfigurationRequest $request)
     {
-        $data['request'] = $request->validate([
-            'name'=>['required',Rule::unique('categories')],
-            'description' => 'nullable',
-        ]);
+        $data['request'] = $request->validated();
         try {
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
-            $data = array_merge($data['value'],$data['request']);
-            $paymentType = PaymentType::query()->create($data);
+            $table_name = 'PaymentType';
+            $this->repository::storeConfig($table_name, $data);
             DB::commit();
             return redirect()->back()->with('success','PaymentType Successfully Inserted');
         }

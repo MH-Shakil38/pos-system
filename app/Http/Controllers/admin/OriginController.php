@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConfigurationRequest;
 use App\Models\Origin;
+use App\Repository\ConfigurationRepository;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,11 @@ use File;
 class OriginController extends Controller
 {
     use PosTrait;
+    protected $repository;
+    public function __construct(ConfigurationRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,19 +41,14 @@ class OriginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ConfigurationRequest $request)
     {
-        $data['request'] = $request->validate([
-            'name'=>['required',Rule::unique('categories')],
-            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,svg',
-            'description'=> 'nullable',
+        $data['request'] = $request->validated();
 
-        ]);
         try {
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
-            $data = array_merge($data['value'],$data['request']);
-            $origin = Origin::query()->create($data);
+            $table_name = 'Origin';
+            $origin = $this->repository::storeConfig($table_name, $data);
             if($request->hasFile("thumbnail")){
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::ORIGIN_IMAGE,429,500);
                 $origin->update(["thumbnail"=>$data["thumbnail"]]);

@@ -53,7 +53,7 @@
 {{--                            <a href="javascript:void(0);">Computers</a>--}}
                         </td>
                         <td> {{$info->description}}</td>
-                        <td> {{$info->created_by}}</td>
+                        <td> {{$info->user->name}}</td>
                         <td>
                             <a class="me-3"
                                href="{{route('admin.category.edit',$info->id)}}">

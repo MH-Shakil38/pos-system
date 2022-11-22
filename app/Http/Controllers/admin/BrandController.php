@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConfigurationRequest;
 use App\Models\Brand;
+use App\Repository\ConfigurationRepository;
 use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,11 @@ use PhpParser\Node\Stmt\Return_;
 class BrandController extends Controller
 {
     use PosTrait;
+    protected $repository;
+    public function __construct(ConfigurationRepository $repository)
+    {
+        $this->repository = $repository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,18 +40,13 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ConfigurationRequest $request)
     {
-        $data['request'] = $request->validate([
-            'name'=>['required',Rule::unique('categories')],
-            'thumbnail' => 'required|image|mimes:jpg,jpeg,png,svg',
-            'description'=> 'nullable',
-        ]);
+        $data['request'] = $request->validated();
         try {
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
-            $data = array_merge($data['value'],$data['request']);
-            $brand = Brand::query()->create($data);
+            $table_name = 'Brand';
+            $brand = $this->repository::storeConfig($table_name, $data);
             if($request->hasFile("thumbnail")){
                 $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::BRAND_LOGO,429,500);
                 $brand->update(["thumbnail"=>$data["thumbnail"]]);

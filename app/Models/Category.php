@@ -18,4 +18,10 @@ class Category extends Model
         'isActive',
         'created_by',
     ];
+    public function user(){
+        return $this->belongsTo(User::class,'created_by');
+    }
+    public function parent(){
+        return $this->belongsTo(Category::class);
+    }
 }

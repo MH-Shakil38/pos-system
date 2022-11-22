@@ -99,7 +99,7 @@
                 <div class="col-lg-3 col-sm-3 col-12">
                     <div class="form-group">
                         <label>Quantity</label>
-                        <input type="number" id="qty" class="form-control" name="qty" placeholder="Ex: 22">
+                        <input type="number" id="qty" class="form-control" placeholder="Ex: 22">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-12">
