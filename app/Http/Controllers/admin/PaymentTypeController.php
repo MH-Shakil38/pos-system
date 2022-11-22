@@ -99,14 +99,11 @@ class PaymentTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data['request'] = $request->validate([
-            'name'=>['required',Rule::unique('paymentTypes')->ignore($id)],
-            'description'=>'nullable',
-        ]);
+        $data['request'] = $request->validated();
         try {
             DB::beginTransaction();
-            $data['value'] = ['slug' =>  Str::slug($request->name), 'created_by' => Auth::user()->id];
-            $data = array_merge($data['value'],$data['request']);
+            $table_name = 'PaymentType';
+            $origin = $this->repository::storeConfig($table_name, $data);
             $paymentType = PaymentType::findOrFail($id)->update($data);
             DB::commit();
             return redirect()->route('admin.paymentType.index')->with('success','PaymentType Successfully Updated');
