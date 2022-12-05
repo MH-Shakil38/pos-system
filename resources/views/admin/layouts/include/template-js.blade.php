@@ -16,7 +16,6 @@
 <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalerts.min.js"></script>
 <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/script.js"></script>
 {{--modal js--}}
-<script src="assets/js/jquery-1.11.1.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.backstretch.min.js"></script>
 <script src="assets/js/scripts.js"></script>

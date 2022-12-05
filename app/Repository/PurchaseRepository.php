@@ -60,6 +60,8 @@ class PurchaseRepository
             </td>
         </tr>';
         return $html_data;
-
+    }
+    public function stockGenerate($purchase){
+        return 'hello';
     }
 }

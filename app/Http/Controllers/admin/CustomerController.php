@@ -23,7 +23,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $data['customers'] = Customer::query()->cursor();
+        $data['customers'] = Customer::getAll();
        return view('admin.people.customer-list')->with($data);
     }
 

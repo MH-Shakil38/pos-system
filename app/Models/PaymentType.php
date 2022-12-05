@@ -21,4 +21,32 @@ class PaymentType extends Model
     public function purchases(){
         return $this->hasMany(Purchase::class);
     }
+
+    /**
+     * ###########################################
+     * #        Repository Methods Start         #
+     * ###########################################
+     * */
+
+
+    public static function getAll($is_pluck =false)
+    {
+        $query = self::query();
+        $query->latest();
+
+        return $is_pluck ? $query->pluck("name","id") : $query->cursor();
+    }
+
+
+    public static function findById($id)
+    {
+
+        return self::query()->findOrFail($id);
+    }
+    /**
+     * ###########################################
+     * #        Repository Methods END         #
+     * ###########################################
+     * */
+
 }

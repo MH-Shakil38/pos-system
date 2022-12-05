@@ -120,9 +120,11 @@
                         <li><a class=""
                                href="{{route('admin.report.customer')}}">Customer Report</a></li>
                         <li><a class=""
-                               href="{{route('admin.report.supplier')}}">Supplier Report</a></li>
+                               href="{{route('admin.report.suppliers.purchases')}}">Supplier Report</a></li>
                         <li><a class=""
-                              href="{{route('admin.report.sale')}}">Sale Report</a></li>
+                              href="{{route('admin.xyz')}}">Sale Report</a></li>
+                        <li><a class=""
+                               href="{{route('admin.report.purchases')}}">Purchase Report</a></li>
                         <li><a class=""
                                href="https://dreamspos.dreamguystech.com/laravel/template/public/createsalesreturns">New
                                 Sales Return</a></li>

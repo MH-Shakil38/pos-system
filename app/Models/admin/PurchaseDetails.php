@@ -48,6 +48,13 @@ class PurchaseDetails extends Model
     public function size(){
         return $this->belongsTo(Size::class);
     }
+
+    /**
+     * ###########################################
+     * #        Repository Methods Start         #
+     * ###########################################
+     * */
+
     public static function storePurchaseDetails($purchase, $card)
     {
         return self::query()->create([
@@ -64,4 +71,11 @@ class PurchaseDetails extends Model
         "total"             => $card->total,
         ]);
     }
+
+    /**
+     * ###########################################
+     * #        Repository Methods END         #
+     * ###########################################
+     * */
+
 }

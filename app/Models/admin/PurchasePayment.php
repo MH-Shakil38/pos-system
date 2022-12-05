@@ -25,6 +25,13 @@ class PurchasePayment extends Model
     public function purchase_details(){
         return $this->belongsTo(PurchaseDetails::class);
     }
+
+    /**
+     * ###########################################
+     * #        Repository Methods Start         #
+     * ###########################################
+     * */
+
     public static function storePurchasePayment($purchase, $payment){
         $card_total = PurchaseDetails::query()->where('purchase_id', $purchase->id)->sum('total');
         return self::query()->create([
@@ -36,4 +43,10 @@ class PurchasePayment extends Model
             'note' => $payment['note'],
         ]);
     }
+    /**
+     * ###########################################
+     * #        Repository Methods END         #
+     * ###########################################
+     * */
+
 }

@@ -45,18 +45,21 @@ class Supplier extends Model
      * Repository Methods
      * */
 
-    public static function getAll($is_pluck = false, $order_by_id_desc = true)
+    public static function getAll($is_pluck = false, $order_by_id_desc = true, $relation=false)
     {
         $query = self::query();
-
+        if($relation){
+            return $query->with('purchases')->orderBy('id','desc')->get();
+        }
         ($order_by_id_desc ? $query->latest() : $query->orderBy("id"));
 
         return $is_pluck ? $query->pluck("name","id") : $query->cursor();
     }
 
-    public static function findById($id)
+    public static function findById($id,$relation = false)
     {
-
-        return self::query()->findOrFail($id);
+        $query = self::query();
+       return ($relation ? $query->with('purchases') : $query)->findOrFail($id);
+//        return self::query()->findOrFail($id);
     }
 }

@@ -40,14 +40,6 @@ class PurchaseController extends Controller
     public function index()
     {
       $data['purchases'] = Purchase::query()->with(['supplier','purchase_payment'])->orderBy('id','DESC')->get();
-
-//        $data['purchases'] = Purchase::query()
-//            ->join('products','products.id', '=', 'purchases.product_id')
-//            ->join('purchase_details','purchase_details.purchase_id', '=', 'purchases.id')
-//            ->join('colors as cl', 'purchase_details.color_id', '=', 'cl.id')
-//            ->join('sizes as s', 'purchase_details.size_id', '=', 's.id')
-//            ->select('cl.name as cName', 's.name as sName', 'products.*', 'purchase_details.*')
-//            ->get();
       return view('admin.purchase.index')->with($data);
     }
 
@@ -62,10 +54,10 @@ class PurchaseController extends Controller
         $data['suppliers']     = Supplier::getAll(true);
         $data['categories']    = Category::getAll(true);
         $data['brands']        = Brand::getAll(true);
-        $data['sizes']         = Size::query()->orderByDesc('id')->pluck('name','id');
-        $data['colors']        = Color::query()->orderByDesc('id')->pluck('name','id');
-        $data['paymentTypes']  = PaymentType::query()->orderByDesc('id')->pluck('name','id');
-        $data['origins']       = Origin::query()->orderByDesc('id')->pluck('name','id');
+        $data['sizes']         = Size::getAll(true);
+        $data['colors']        = Color::getAll(true);
+        $data['paymentTypes']  = PaymentType::getAll(true);
+        $data['origins']       = Origin::getAll(true);
 
         return view('admin.purchase.manage-purchase')->with($data);
     }
@@ -85,6 +77,7 @@ class PurchaseController extends Controller
             $purchaseData = $request->only(['supplier_id','status','date']);
             $purchase = Purchase::storePurchase($purchaseData ,Auth::user()->id);
 
+
 //          purchase details store from purchase card, and clear card data
             $purchase_card = PurchaseCard::query()->where('supplier_id', $request->supplier_id)->get();
             foreach ($purchase_card as $key => $card) {
@@ -96,10 +89,20 @@ class PurchaseController extends Controller
                 $card->delete();
             }
 
+
 //          Store purchase payment
             $paymentData = $request->only(['paid','note','payment_type_id']);
 
+
             PurchasePayment::storePurchasePayment($purchase, $paymentData);
+
+
+            /**
+             * purchase stock generate
+             */
+            $stock = $this->repositoy->stockGenerate($purchase);
+            dd($stock);
+
 
             DB::commit();
             return redirect()->route('admin.purchase.details', $purchase->id);
@@ -115,66 +118,6 @@ class PurchaseController extends Controller
                     $e
                 );
             }
-
-//dd($request->all());
-//        $data['purchase'] = $request->validate([
-//            'qty'                => 'required',
-//            'product_id'         => 'required',
-//            'supplier_id'        => 'required',
-//            'thumbnail'          => 'image|mimes:jpg,jpeg,png,svg',
-//            'details'              =>'nullable',
-//        ]);
-//        $data['purchase_details'] = $request->validate([
-//            'qty'                 => 'nullable',
-//            'category_id'         => 'nullable',
-//            'brand_id'            => 'nullable',
-//            'color_id'            => 'nullable',
-//            'origin_id'           => 'nullable',
-//            'size_id'             => 'nullable',
-//        ]);
-//        $data['purchase_payment'] = $request->validate([
-//            'payment_type_id'     => 'required',
-//            'total_price'         => 'nullable',
-//            'selling_price'       => 'required',
-//        ]);
-//
-//
-//        try {
-//            DB::beginTransaction();
-//
-//            $purchase = self::storePurhcase($data['purchase']);
-//            $purchase_details = self::storePurhcaseDetails($data['purchase_details'],$purchase->id);
-//            $purchase_payment = self::storePurhcasePayments($data['purchase_payment'],$purchase_details->id);
-//            if($request->hasFile("thumbnail")){
-//                $data["thumbnail"] = $this->FileProcessing($request->file("thumbnail"),PosService::PRODUCT_THUMBNAIL,429,500);
-//                $purchase->update(["thumbnail"=>$data["thumbnail"]]);
-//            }
-//
-//            if($pictures =$request->hasFile("pictures")){
-//                $image = new ProductImage();
-//                foreach ($request['pictures'] as $file){
-//                    $data["picture"] = $this->FileProcessing($file,PosService::PRODUCT_IMAGE,429,500);
-//                    $image->create(['purchase_details_id'=>$purchase_details->id,"picture"=>$data["picture"]]);
-////                    $purchase_details->update(["picture"=>$data["picture"]]);
-//                }
-//            }
-//
-//            DB::commit();
-//            return redirect()->back()->with('success','Category Successfully Inserted');
-//        }
-//        catch (\Throwable $e){
-//            DB::rollBack();
-//
-//            dd(
-//                $e->getMessage(),
-//                $e->getFile(),
-//                $e->getCode(),
-//                $e->getLine(),
-//                $e
-//            );
-//        }
-
-
     }
 
     /**

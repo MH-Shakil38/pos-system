@@ -5,16 +5,85 @@
             <h4>Customer List</h4>
             <h6>Manage your Customers Report</h6>
         </div>
-        <div class="page-btn">
-            <a href="{{route('admin.customer.create')}}" class="btn btn-added"><img
-                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                    alt="img">Add Customer</a>
-        </div>
     </div>
 
     <div class="card">
         <div class="card-body">
-            @include('admin.include.table-header')
+            <div class="table-top">
+                <div class="search-set">
+                    <div class="search-path">
+                        <a class="btn btn-filter" id="filter_search">
+                            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/filter.svg"
+                                 alt="img">
+                            <span><img
+                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/closes.svg"
+                                    alt="img"></span>
+                        </a>
+                    </div>
+                    <div class="search-input">
+                        <a class="btn btn-searchset"><img
+                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-white.svg"
+                                alt="img"></a>
+                    </div>
+                </div>
+                <div class="wordset">
+                    <ul>
+                        <li>
+                            <a href="{{route('admin.report.pdf.all.customer.sale')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/pdf.svg"
+                                    alt="img"></a>
+                        </li>
+                        <li>
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/excel.svg"
+                                    alt="img"></a>
+                        </li>
+                        <li>
+                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/printer.svg"
+                                    alt="img"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card" id="filter_inputs">
+                <div class="card-body pb-0">
+                    <div class="row">
+                        <div class="col-lg-2 col-sm-6 col-12">
+                            <div class="form-group">
+                                <select class="select">
+                                    <option>Choose Category</option>
+                                    <option>Computers</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 col-12">
+                            <div class="form-group">
+                                <select class="select">
+                                    <option>Choose Sub Category</option>
+                                    <option>Fruits</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 col-12">
+                            <div class="form-group">
+                                <select class="select">
+                                    <option>Choose Sub Brand</option>
+                                    <option>Iphone</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-sm-6 col-12 ms-auto">
+                            <div class="form-group">
+                                <a class="btn btn-filters ms-auto"><img
+                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
+                                        alt="img"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <hr>
             <div class="table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -57,40 +126,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($customer_reports as $key => $report)
+                        @forelse($customers as $key => $customer)
+                            @php
+                                $total = $customer->sales->sum('sale_payment.total');
+                                $paid = $customer->sales->sum('sale_payment.paid');
+                            @endphp
                             <tr class="odd">
                                 <td></td>
-                                <td>{{$report[0]->customer->name}}</td>
-                                <td>{{$report->count()}}</td>
-                                <td>{{$report->sum('sale_payment.total')}}</td>
-                                <td>{{$report->sum('sale_payment.paid')}}</td>
-                                <td>{{$report->sum('sale_payment.due')}}</td>
+                                <td>{{$customer->name}}</td>
+                                <td>{{$customer->sales->count()}}</td>
+                                <td>{{CurrencyFormate($total)}}</td>
+                                <td>{{CurrencyFormate($paid)}}</td>
+                                <td>
+                                    <span class="badges {{$total- $paid > 0 ? 'bg-lightred' : 'bg-lightgreen'}} ">
+                                        {{CurrencyFormate($total - $paid)}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-info" href="{{route('admin.report.customer.order.list',$customer->id)}}">Order List</a>
+                                </td>
                             </tr>
                         @empty
                         @endforelse
                         </tbody>
                     </table>
-                    <div class="dataTables_length" id="DataTables_Table_0_length"><label><select
-                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
-                                class="custom-select custom-select-sm form-control form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select></label></div>
-                    <div class="dataTables_paginate paging_numbers" id="DataTables_Table_0_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0"
-                                                                            data-dt-idx="0" tabindex="0"
-                                                                            class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0"
-                                                                      data-dt-idx="1" tabindex="0"
-                                                                      class="page-link">2</a></li>
-                        </ul>
-                    </div>
-                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">1 - 10 of
-                        14 items
-                    </div>
                 </div>
             </div>
         </div>

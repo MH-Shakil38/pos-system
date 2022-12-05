@@ -21,4 +21,31 @@ class Customer extends Model
       'customer_code',
       'created_by',
     ];
+    public function sales(){
+        return $this->hasMany(Sale::class);
+    }
+
+    /**
+     * ###########################################
+     * #        Repository Methods Start         #
+     * ###########################################
+     * */
+
+    public static function getAll($relation = false, $pluck = false){
+        $query = self::query();
+        ($relation ? $query->with('sales') : $query )->get();
+       $data =  ($pluck ? $query->pluck('name','id') : $query->get());
+        return $data;
+
+    }
+    public static function getById($id, $relation=false){
+        $query = self::query()->where('id',$id);
+        return ($relation ? $query->with('sales') : $query )->first();
+    }
+    /**
+     * ###########################################
+     * #        Repository Methods END           #
+     * ###########################################
+     * */
+
 }

@@ -12,7 +12,7 @@
           content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('title')</title>
+    <title>@yield('title') | Multi-vendor POS</title>
     @yield('css')
     @include('admin.layouts.include.template-css')
 
@@ -36,7 +36,6 @@
 @yield('js')
 </body>
 
-<!-- Mirrored from dreamspos.dreamguystech.com/laravel/template/public/addproduct by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Oct 2022 17:48:10 GMT -->
 </html>
 
 

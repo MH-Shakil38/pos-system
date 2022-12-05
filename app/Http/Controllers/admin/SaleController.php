@@ -115,7 +115,7 @@ class SaleController extends Controller
                 ]);
 
                 DB::commit();
-                return redirect()->route('admin.sale.details', $sale->id);
+                return redirect()->route('admin.sale.details',$sale->id);
 
             }
         } catch (\Throwable $e) {
@@ -204,11 +204,12 @@ class SaleController extends Controller
             */
             $save_data = $this->sale_repository->save_product_saleCard($req->all());
             /*
-             * load recent store data
+             * load recent store data in blade file,
              */
             $recent = SaleCard::query()->where('id', $save_data->id)->with(['customer', 'product'])->first();
             $html_data = $this->sale_repository->load_recent_add_product($recent);
             $totalPrice = SaleCard::query()->where('customer_id', $recent->customer_id)->sum('total_price');
+
             return response()->json(['success' => $html_data, 'total' => $totalPrice]);
         }
     }

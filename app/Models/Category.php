@@ -26,11 +26,16 @@ class Category extends Model
     public function parent(){
         return $this->belongsTo(Category::class);
     }
+    /**
+     * ###########################################
+     * #        Repository Methods Start         #
+     * ###########################################
+     * */
+
 
     /**
      * Automatic created_by value assigned from logged in user
      * */
-
     protected static function boot(){
         parent::boot();
 
@@ -50,7 +55,13 @@ class Category extends Model
 
     public static function findById($id)
     {
-
         return self::query()->findOrFail($id);
     }
+
+    /**
+     * ###########################################
+     * #        Repository Methods END         #
+     * ###########################################
+     * */
+
 }
