@@ -6,6 +6,6 @@
     <div class="page-btn">
         <a href="{{route($route)}}" class="btn btn-added"><img
                 src="{{addIconSVG()}}"
-                alt="img">Add Sale</a>
+                alt="img">{{$button_name ? $button_name : 'Add'}}</a>
     </div>
 </div>

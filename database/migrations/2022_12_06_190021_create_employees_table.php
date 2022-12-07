@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('present_address')->nullable();
             $table->string('permanent_address')->nullable();
-            $table->string('image')->nullable();
             $table->string('joining_date')->nullable();
             $table->string('joining_salary')->nullable();
             $table->timestamps();

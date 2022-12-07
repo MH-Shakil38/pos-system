@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\admin\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -34,9 +37,36 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $userData = $request->only(['name','email','password']);
+            $user = User::store($userData);
+            $employeeData = $request->only([
+                'phone',
+                'nid',
+                'image',
+                'present_address',
+                'permanent_address',
+                'joining_date',
+                'joining_salary'
+            ]);
+            $employee = Employee::store($employeeData, $user);
+            dd($employee);
+            DB::commit();
+        }
+        catch (\Throwable $e){
+            DB::rollBack();
+            dd(
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getCode(),
+                $e->getLine(),
+                $e
+            );
+        }
+
     }
 
     /**
