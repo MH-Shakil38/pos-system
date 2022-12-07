@@ -13,6 +13,7 @@ class PosService
     const SUPPLIER_LOGO            =  self::DEFAULT_DIRECTORY."/supplier/logo/";
     const PRODUCT_IMAGE            =  self::DEFAULT_DIRECTORY."/product/image/";
     const CUSTOMER_IMAGE            =  self::DEFAULT_DIRECTORY."/customer/";
+    const EMPLOYEE_IMAGE            =  self::DEFAULT_DIRECTORY."/employee/";
 
 
     public static function userID()

@@ -23,6 +23,11 @@ class Employee extends Model
     public function user(){
       return $this->belongsTo(User::class,'user_id');
     }
+
+
+    public static function getAll(){
+        return self::query()->with('user')->get();
+    }
     public static function store($payload, $user){
         return self::query()->create([
             'user_id'=>$user->id,

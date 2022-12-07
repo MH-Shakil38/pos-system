@@ -5,12 +5,16 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequest;
 use App\Models\admin\Employee;
+use App\Models\admin\ProductImage;
 use App\Models\User;
+use App\Service\PosService;
+use App\Traits\PosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
+    use PosTrait;
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +22,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return 'employee list';
+        $data['employees'] = Employee::getAll();
+        return view('admin.employee.index')->with($data);
     }
 
     /**
@@ -53,8 +58,13 @@ class EmployeeController extends Controller
                 'joining_salary'
             ]);
             $employee = Employee::store($employeeData, $user);
-            dd($employee);
+            if($request->hasFile("image")){
+                $data["image"] = $this->FileProcessing($request->file("image"),PosService::EMPLOYEE_IMAGE,429,500);
+                $employee->update(["image"=>$data["image"]]);
+            }
             DB::commit();
+
+            return redirect()->back()->with('success','Data successfully inserted');
         }
         catch (\Throwable $e){
             DB::rollBack();
