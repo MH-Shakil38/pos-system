@@ -10,6 +10,7 @@ use App\Models\admin\PurchaseDetails;
 use App\Models\admin\Sale;
 use App\Models\admin\SaleDetalis;
 use App\Models\admin\SalePayment;
+use App\Models\admin\Stock;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
@@ -40,14 +41,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $data['sales'] = Sale::query()->with(['customer', 'sale_details', 'sale_payment'])
-//            ->join('sale_payments', 'sale_payments.sale_id', '=', 'sales.id')
-//            ->join('users', 'sales.created_by', '=', 'users.id')
-//            ->select('sales.*', 'sale_payments.*', 'users.name as admin')
+        $data['sales'] = Sale::query()
+            ->with(['customer', 'sale_details', 'sale_payment'])
             ->get();
         return view('admin.sales.sale_list')->with($data);
-//        $data['customer'] = Customer::query()->get();
-//        return view('admin.sales.add-new-sales')->with($data);
     }
 
     /**
@@ -65,7 +62,8 @@ class SaleController extends Controller
         $data['brands'] = Brand::query()->pluck('name', 'id');
         $data['purchases'] = PurchaseDetails::query()->with('product')->get();
         $data['paymentTypes'] = PaymentType::query()->pluck('name', 'id');
-        return view('admin.sales.create')->with($data);
+
+        return view('admin.sales.create.blade.php')->with($data);
     }
 
     /**
@@ -80,33 +78,56 @@ class SaleController extends Controller
             DB::beginTransaction();
 
             if (isset($request->customer_id)) {
-                $user = Auth::user()->id;
-                $sale = Sale::create([
-                    'customer_id' => $request->customer_id,
-                    'note' => $request->note,
-                    'status' => $request->status,
-                    'created_by' => $user,
-                    'order_date' => $request->oreder_date,
-                    'deliver_date' => $request->deliver_date,
-                    'ref' => $request->ref]);
-                $sale_card = SaleCard::query()->where('customer_id', $request->customer_id)->get();
-                $totalPrice = SaleCard::query()->where('customer_id', $request->customer_id)->sum('total_price');
+
+                /**
+                 * Store sale data in sale model request all data
+                 */
+                $data = $request->only([
+                    'customer_id',
+                    'note',
+                    'status',
+                    'order_date',
+                    'deliver_date',
+                    'ref'
+                ]);
+
+                $sale = Sale::store($data);
+
+                /**
+                 *   collect customer total amount, for save sale payment
+                 */
+                $totalPrice = SaleCard::sumByCustomerID($request->customer_id);
+
+
+                /**
+                 *   calculate total due, for store this sale payment
+                 */
                 $totalDue = $totalPrice - $request->paymentType;
+
+                /**
+                 *  customer all record collect from sale card if any record find for this customer
+                 */
+                $sale_card = SaleCard::query()->where('customer_id', $request->customer_id)->get();
+
+                /**
+                 *  store this sale details from sale card to sale details,
+                 */
                 foreach ($sale_card as $key => $card) {
-                    $sd = new SaleDetalis();
-                    $sd->sale_id = $sale->id;
-                    $sd->product_id = $card->product_id;
-                    $sd->qty = $card->qty;
-                    $sd->color_id = $card->color_id;
-                    $sd->size_id = $card->size_id;
-                    $sd->category_id = $card->category_id;
-                    $sd->origin_id = $card->origin_id;
-                    $sd->brand_id = $card->brand_id;
-                    $sd->selling_price = $card->selling_price;
-                    $sd->save();
+                    /**sale details store*/
+                    $details = SaleDetalis::storeSaleDetails($sale, $card);
+                    /** Stock generate */
+                    /**
+                     * purchase stock generate
+                     * param 1: $details = contain purchase details data
+                     * param 2: stock_out is a stock model column name,
+                     * when method get stock_out than update or  save data in stock_out column,
+                     * sale always update or insert stock_out
+                     */
+                    $stock = Stock::stockManage($details, 'stock_out');
                     $card->delete();
                 }
-                SalePayment::create([
+                SalePayment::query()
+                    ->create([
                     'sale_id' => $sale->id,
                     'payment_type_id' => $request->paymentType,
                     'total' => $totalPrice,
@@ -118,7 +139,8 @@ class SaleController extends Controller
                 return redirect()->route('admin.sale.details',$sale->id);
 
             }
-        } catch (\Throwable $e) {
+        }
+        catch (\Throwable $e) {
             DB::rollBack();
 
             dd(
@@ -214,7 +236,7 @@ class SaleController extends Controller
         }
     }
     public function sale_details($id){
-        $data['sale'] = Sale::query()->where('id', $id)->with(['customer', 'sale_details', 'sale_payment'])->first();
+        $data['sale'] = Sale::getById($id,true);
         return view('admin.sales.details')->with($data);
     }
 

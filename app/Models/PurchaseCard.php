@@ -15,7 +15,6 @@ class PurchaseCard extends Model
       'supplier_id',
       'purchase_id',
       'product_id',
-      'category_id',
       'brand_id',
       'color_id',
       'size_id',
@@ -30,9 +29,6 @@ class PurchaseCard extends Model
     }
     public function product(){
         return $this->belongsTo(Product::class);
-    }
-    public function category(){
-        return $this->belongsTo(Category::class);
     }
     public function brand(){
         return $this->belongsTo(Brand::class);

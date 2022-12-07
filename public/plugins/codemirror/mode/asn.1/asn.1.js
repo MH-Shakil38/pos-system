@@ -198,7 +198,7 @@
     " GROUP GROUPS ELEMENTS EQUALITY ORDERING SUBSTRINGS" +
     " DEFINED"),
     accessTypes: words("not-accessible accessible-for-notify read-only" +
-    " read-create read-write"),
+    " read-create.blade.php read-write"),
     multiLineStrings: true
   });
 });

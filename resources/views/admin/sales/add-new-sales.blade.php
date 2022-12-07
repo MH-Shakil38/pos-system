@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-lg-2 col-sm-2 col-2 ps-0">
                                     <div class="add-icon">
-                                        <a href="{{route('admin.customer.create')}}" target="_blank"><span><img
+                                        <a href="{{route('admin.customer.create.blade.php')}}" target="_blank"><span><img
                                                     src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus1.svg"
                                                     alt="img"></span></a>
                                     </div>

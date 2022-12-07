@@ -3,7 +3,7 @@
     <div class="row">
         {{--page header start--}}
         <div class="col-md-12 col-sm-12 col-lg-12">
-            @include('admin.include.page_header',['route'=>'admin.sale.create','header_name'=>'Sale Report','title'=>'Manage your Sale Report'])
+            @include('admin.include.page_header',['route'=>'admin.sale.create.blade.php','header_name'=>'Sale Report','title'=>'Manage your Sale Report'])
         </div>
         {{-- page header end--}}
 

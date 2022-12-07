@@ -20,12 +20,12 @@
       var self = this;
 
       // ui has renders to build ui elements.
-      //  - you can create a button with `ui.button`
+      //  - you can create.blade.php a button with `ui.button`
       var ui = $.summernote.ui;
 
       // add hello button
       context.memo('button.hello', function() {
-        // create button
+        // create.blade.php button
         var button = ui.button({
           contents: '<i class="fa fa-child"/> Hello',
           tooltip: 'hello',
@@ -37,7 +37,7 @@
           },
         });
 
-        // create jQuery object from button instance.
+        // create.blade.php jQuery object from button instance.
         var $hello = button.render();
         return $hello;
       });
@@ -57,7 +57,7 @@
       };
 
       // This method will be called when editor is initialized by $('..').summernote();
-      // You can create elements for plugin
+      // You can create.blade.php elements for plugin
       this.initialize = function() {
         this.$panel = $('<div class="hello-panel"/>').css({
           position: 'absolute',

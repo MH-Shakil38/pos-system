@@ -38,7 +38,7 @@ class ProductController extends Controller
     {
         $data['products'] = Product::query()->get();
         $data ['categories'] = Category::query()->get();
-        return view('admin.product.create')->with($data);
+        return view('admin.product.create.blade.php')->with($data);
     }
 
     /**
@@ -116,7 +116,7 @@ class ProductController extends Controller
     {
         $data['product'] = Product::findOrFail($id);
         $data['products'] = Product::all();
-        return view('admin.product.create')->with($data);
+        return view('admin.product.create.blade.php')->with($data);
     }
 
     /**
@@ -143,5 +143,17 @@ class ProductController extends Controller
     }
     public function manageProduct($id){
         return'success';
+    }
+
+
+
+
+    /**optional-- All Product category update*/
+    public function category_update(){
+        $product =   \App\Models\admin\Product::query()->get();
+        for ($i=0;$i<=$product->count();$i++){
+            $c = \App\Models\Category::query()->inRandomOrder()->first();
+            \App\Models\admin\Product::query()->where('id','=',$i)->update(['category_id'=>$c->id]);
+        }
     }
 }

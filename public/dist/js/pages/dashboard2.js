@@ -5,7 +5,7 @@ $(function () {
 
   /* ChartJS
    * -------
-   * Here we will create a few charts using ChartJS
+   * Here we will create.blade.php a few charts using ChartJS
    */
 
   //-----------------------

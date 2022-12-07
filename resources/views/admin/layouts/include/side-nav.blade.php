@@ -130,6 +130,26 @@
                                 Sales Return</a></li>
                     </ul>
                 </li>
+
+
+                {{--Employee section start--}}
+                <li class="submenu">
+                    <a class="" href="javascript:void(0);"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/sales1.svg"
+                            alt="img"><span> Employee</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li>
+                            <a class="" href="{{route('admin.employee.index')}}">Employee List </a>
+                        </li>
+                        <li>
+                            <a class="" href="{{route('admin.employee.create')}}">Add Employee</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
                 <li class="submenu">
                     <a class="" href="javascript:void(0);"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"

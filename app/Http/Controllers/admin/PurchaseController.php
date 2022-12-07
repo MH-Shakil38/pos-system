@@ -6,6 +6,7 @@ use App\Models\admin\Product;
 use App\Models\admin\ProductImage;
 use App\Models\admin\Purchase;
 use App\Models\admin\PurchaseDetails;
+use App\Models\admin\Stock;
 use App\Models\admin\Supplier;
 use App\Models\Brand;
 use App\Models\Category;
@@ -75,34 +76,47 @@ class PurchaseController extends Controller
 
 //          store purchase
             $purchaseData = $request->only(['supplier_id','status','date']);
-            $purchase = Purchase::storePurchase($purchaseData ,Auth::user()->id);
+            $purchase = Purchase::storePurchase($purchaseData);
 
-
-//          purchase details store from purchase card, and clear card data
+            /**
+             *  collect purchase details for create.blade.php purchase table
+             */
             $purchase_card = PurchaseCard::query()->where('supplier_id', $request->supplier_id)->get();
+
+            /**
+             * purchase data save form PurchaseCard model
+             */
             foreach ($purchase_card as $key => $card) {
 
-//              add purchase details from purchase card to purchase details
-                PurchaseDetails::storePurchaseDetails($purchase, $card);
+                /**
+                 * add purchase details from purchase card to purchase details
+                */
 
-//              delete purchase card record after creating purchase details
+               $details =  PurchaseDetails::storePurchaseDetails($purchase, $card);
+
+                /**
+                 * purchase stock generate
+                 * param 1: $details = contain purchase details data
+                 * param 2: stock_in is a stock model column name,
+                 * when method get stock_in than update or  save data in stock_in column,
+                 * purchase always update or insert stock_in
+                 */
+                $stock = Stock::stockManage($details,'stock_in');
+
+                /**when details record save than the record will be deleted*/
                 $card->delete();
             }
 
 
-//          Store purchase payment
+            /** collect Purchase payment data from request */
             $paymentData = $request->only(['paid','note','payment_type_id']);
 
-
-            PurchasePayment::storePurchasePayment($purchase, $paymentData);
-
-
             /**
-             * purchase stock generate
+             *  Purchase payment store method
+             *  param 1: $purchase contain recently store purchase value and use payment table purchase information
+             *  param 2: $paymentData pass for save payment information form request.
              */
-            $stock = $this->repositoy->stockGenerate($purchase);
-            dd($stock);
-
+            PurchasePayment::storePurchasePayment($purchase, $paymentData);
 
             DB::commit();
             return redirect()->route('admin.purchase.details', $purchase->id);
@@ -160,33 +174,44 @@ class PurchaseController extends Controller
     }
     public function purchase_card(Request $request){
 
-//      query supplier old data from card
+        /**query supplier old data from card*/
         if (isset($request->old_data) && isset($request->supplier)){
             $purchase = $this->repositoy::supplierOldData($request->supplier);
             $grand_total = PurchaseCard::query()->where('supplier_id',$request->supplier)->sum('total');
             return response()->json(['success'=>$purchase,'grand_total'=>$grand_total]);
         }
-//      add supplier recent data and append row in front
+
+
+        /**add supplier recent data and append row in front*/
         if (isset($request->product_id) && isset($request->supplier_id)) {
             $data['request'] = $request->all();
             $data['total'] = ['total' => $request->qty * $request->purchase_price];
 
-//          marg request data and total for store card data at a time
+
+          /** marg request data and total for store card data at a time */
             $data = array_merge($data['request'], $data['total']);
+
 
 //          store purchase data in purchase card
             $purchase_card = PurchaseCard::query()->create($data);
 
-//          query last add card data, for append row in show table row
-            $card = PurchaseCard::query()->where('id',$purchase_card->id)->with(['product','brand','category','color','size','origin','supplier'])->first();
 
-//          create table rew with last created purchase card data for append table row
+//          query last add card data, for append row in show table row
+            $card = PurchaseCard::query()
+                ->where('id',$purchase_card->id)
+                ->with(['product','brand','color','size','origin','supplier'])
+                ->first();
+
+
+//          create.blade.php table rew with last created purchase card data for append table row
             $html_data = $this->repositoy::appendSupplierRow($card);
+
 
 //          query total amount this supplier
             $grand_total = PurchaseCard::query()->where('supplier_id',$request->supplier_id)->sum('total');
 
             return response()->json(['card_row' => $html_data,'grand_total'=>$grand_total]);
+
         }
     }
     /**

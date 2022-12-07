@@ -39,7 +39,15 @@ class Sale extends Model
      * #        Repository Methods Start         #
      * ###########################################
      * */
+    protected static function boot(){
+        parent::boot();
 
+        static::creating(function ($query){
+            $query->created_by = auth()->id();
+        });
+    }
+
+    
     public static function getById($id, $relation=false){
         $query = self::query();
 
@@ -48,6 +56,18 @@ class Sale extends Model
         return $query->findOrFail($id);
     }
 
+
+    public static function store($data){
+//        dd($data);
+       return self::create([
+            'customer_id' => $data['customer_id'],
+            'note' => $data['note'],
+//            'status' => $data['status'] ?? '',
+            'order_date' => $data['order_date'],
+            'deliver_date' => $data['deliver_date'],
+            'ref' =>$data['ref']
+        ]);
+    }
     public static function getAll($order_by = false){
         $query = self::query();
         return ($order_by ? $query->orderBy('id',$order_by) : $query )->with(['customer','sale_details','sale_payment'])->get();

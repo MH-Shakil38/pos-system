@@ -6,7 +6,7 @@
             <h6>Manage your Customers</h6>
         </div>
         <div class="page-btn">
-            <a href="{{route('admin.customer.create')}}" class="btn btn-added"><img
+            <a href="{{route('admin.customer.create.blade.php')}}" class="btn btn-added"><img
                     src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
                     alt="img">Add Customer</a>
         </div>

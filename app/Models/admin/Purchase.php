@@ -26,4 +26,20 @@ class Purchase extends Model
         return $this->hasOne(PurchasePayment::class);
     }
 
+
+    protected static function boot(){
+        parent::boot();
+
+        static::creating(function ($query){
+            $query->created_by = auth()->id();
+        });
+    }
+    public static function storePurchase($purchase){
+        return self::query()->create([
+            'supplier_id'=>$purchase['supplier_id'],
+            'status'=>$purchase['status'],
+            'date'=>$purchase['date'],
+        ]);
+
+    }
 }

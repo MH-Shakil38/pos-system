@@ -15,9 +15,11 @@ use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\admin\PdfController;
+use App\Http\Controllers\admin\EmployeeController;
 
 Auth::routes();
 Route::name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('category_update',[ProductController::class,'category_update']);
     Route::get('/dashboard','\App\Http\Controllers\admin\DashboardController@index');
 
 
@@ -52,14 +54,14 @@ Route::name('admin.')->middleware(['auth'])->group(function () {
     /*all purchase route*/
     Route::group(['prefix'=>'purchase'], function(){
         Route::resource('/purchase',PurchaseController::class,['name'=>'purchase']);
-        Route::post('/purchase-card','\App\Http\Controllers\admin\PurchaseController@purchase_card')->name('add-purchase-card');
+        Route::post('/purchase-card',[PurchaseController::class,'purchase_card'])->name('add-purchase-card');
         Route::get('/purchase-details/{id}','\App\Http\Controllers\admin\PurchaseController@purchase_details')->name('purchase.details');
         Route::get('/invoice/{id}','\App\Http\Controllers\admin\PdfController@purchase_invoice')->name('purchase.invoice');
     });
 
     /*all sale route*/
     Route::group(['prefix'=>'sale'], function(){
-        Route::get('/details/{id}','\App\Http\Controllers\admin\SaleController@sale_details')->name('sale.details');
+        Route::get('/details/{id}',[SaleController::class,'sale_details'])->name('sale.details');
         Route::post('/product','\App\Http\Controllers\admin\SaleController@addSale')->name('add-product');
         Route::get('/invoice/{id}','\App\Http\Controllers\admin\PdfController@sale_invoice')->name('sale.invoice');
         Route::resource('/sale',SaleController::class,['name'=>'sale']);
@@ -94,6 +96,12 @@ Route::name('admin.')->middleware(['auth'])->group(function () {
     Route::group(['prefix'=>'pdf'],function (){
         Route::get('report-pdf-all-customer-sale',[PdfController::class,'total_customer_sale'])->name('report.pdf.all.customer.sale');
         Route::get('report_pdf_single_customer_order_list/{customer_id}',[PdfController::class,'single_customer_order_list'])->name('report.pdf.single.customer.order.list');
+    });
+
+
+    /** employee route */
+    Route::prefix('employee')->group(function (){
+        Route::resource('employee',EmployeeController::class);
     });
 
 });

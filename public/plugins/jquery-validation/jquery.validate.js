@@ -1354,7 +1354,7 @@ $.extend( $.validator, {
 
 		if ( $.validator.autoCreateRanges ) {
 
-			// Auto-create ranges
+			// Auto-create.blade.php ranges
 			if ( rules.min != null && rules.max != null ) {
 				rules.range = [ rules.min, rules.max ];
 				delete rules.min;

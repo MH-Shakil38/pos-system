@@ -1489,7 +1489,7 @@
                     return '<div class="item">' + escape(data[field_label]) + '</div>';
                 },
                 'option_create': function(data, escape) {
-                    return '<div class="create">Add <strong>' + escape(data.input) + '</strong>&#x2026;</div>';
+                    return '<div class="create.blade.php">Add <strong>' + escape(data.input) + '</strong>&#x2026;</div>';
                 }
             };
 
@@ -1634,7 +1634,7 @@
             }
 
             // If a regex or string is included, this will split the pasted
-            // input and create Items for each separate value
+            // input and create.blade.php Items for each separate value
             if (self.settings.splitOn) {
 
                 // Wait for pasted text to be recognized in value
@@ -2397,7 +2397,7 @@
                 self.setupDropdownHeight();
             }
 
-            // add create option
+            // add create.blade.php option
             has_create_option = self.canCreate(query);
             if (has_create_option) {
                 if(self.settings.showAddOptionOnCreate) {
@@ -2884,7 +2884,7 @@
         },
 
         /**
-         * Invokes the `create` method provided in the
+         * Invokes the `create.blade.php` method provided in the
          * selectize options that should provide the data
          * for the new item, given the user input.
          *
@@ -3589,7 +3589,7 @@
 
         /**
          * Determines whether or not to display the
-         * create item prompt, given a user input.
+         * create.blade.php item prompt, given a user input.
          *
          * @param {string} input
          * @return {boolean}

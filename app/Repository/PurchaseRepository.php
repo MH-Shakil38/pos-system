@@ -2,13 +2,15 @@
 
 namespace App\Repository;
 
+use App\Models\admin\PurchaseDetails;
+use App\Models\admin\Stock;
 use App\Models\PurchaseCard;
 
 class PurchaseRepository
 {
     public static function supplierOldData($supplier_id): string
     {
-        $purchase = PurchaseCard::query()->where('supplier_id',$supplier_id)->with(['product','brand','category','color','size','origin','supplier'])->get();
+        $purchase = PurchaseCard::query()->where('supplier_id',$supplier_id)->with(['product','brand','color','size','origin','supplier'])->get();
         $html_data = '';
         foreach ($purchase as $card){
             $html_data.='
@@ -20,7 +22,6 @@ class PurchaseRepository
                                     <a href="javascript:void(0);">'.$card->product->name.'</a>
                                 </td>
                                 <td >'.$card->qty.'</td>
-                                <td>'.$card->category->name.'</td>
                                 <td>'.$card->brand->name.'</td>
                                 <td>'.$card->color->name.'</td>
                                 <td>'.$card->size->name.'</td>
@@ -47,7 +48,6 @@ class PurchaseRepository
                 <a href="javascript:void(0);">' . $card->product->name . '</a>
             </td>
             <td >' . $card->qty . '</td>
-            <td>' . $card->category->name . '</td>
             <td>' . $card->brand->name . '</td>
             <td>' . $card->color->name . '</td>
             <td>' . $card->size->name . '</td>
@@ -60,8 +60,5 @@ class PurchaseRepository
             </td>
         </tr>';
         return $html_data;
-    }
-    public function stockGenerate($purchase){
-        return 'hello';
     }
 }

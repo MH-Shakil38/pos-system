@@ -18,7 +18,6 @@
                         <tr>
                             <th>Product Name</th>
                             <th>QTY</th>
-                            <th>Category</th>
                             <th>Brand</th>
                             <th>Color</th>
                             <th>Size</th>
@@ -51,91 +50,20 @@
                         <h2>Order Payment</h2>
                     </div>
                     <div class="card-body">
-
-                         @include("admin.purchase.form-purchase")
-
+                        {{ Form::open(['route'=>['admin.purchase.store'],"method"=>"POST","files"=>true]) }}
+                            @include("admin.purchase.form-purchase")
+                        {{ Form::close() }}
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     {{ Form::open(['route'=>['admin.purchase.store'],"method"=>"POST","files"=>true]) }}
-    <div class="card">
-        <div class="card-body">
-            <div class="row" data-select2-id="20">
-
-                <div class="col-lg-12 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label>Product Name</label>
-                        <div class="input-groupicon">
-                            {!! Form::select(null,$products,null, ['class'=>'form-control select2','id'=>'product','placeholder'=>'Select Product']) !!}
-                            {{--                            <input type="text" class="select2" placeholder="Scan/Search Product by code and select...">--}}
-                            <div class="addonset">
-                                <img
-                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/scanners.svg"
-                                    alt="img">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 col-lg-3 col-sm-6 ">
-                    <div class="form-group">
-                        <label>Category</label>
-                        {!! Form::select(null,$categories,null, ['class'=>'form-control select2','id'=>'category','placeholder'=>'Select Category']) !!}
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 ps-0">
-                    <div class="form-group">
-                        <label>Brand</label>
-                        {!! Form::select(null,$brands,null, ['class'=>'form-control select2','id'=>'brand','placeholder'=>'Select Brand']) !!}
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 ps-0">
-                    <div class="form-group">
-                        <label>Color</label>
-                        {!! Form::select(null,$colors,null, ['class'=>'form-control select2','id'=>'color','placeholder'=>'Select Color']) !!}
-                    </div>
-                </div>
-                <div class="col-md-3 col-lg-3 col-sm-6 ps-0">
-                    <div class="form-group">
-                        <label>Size</label>
-                        {!! Form::select(null,$sizes,null, ['class'=>'form-control select2','id'=>'size','placeholder'=>'Select Size']) !!}
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label>Origin</label>
-                        {!! Form::select(null,$origins,null, ['class'=>'form-control select2','id'=>'origin','placeholder'=>'Select Origin']) !!}
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-3 col-12">
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" id="qty" class="form-control" placeholder="Ex: 22">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label>Purchase Price</label>
-                        <input type="number" id="purchase_price" class="form-control" placeholder="Ex: 22">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-                    <div class="form-group">
-                        <label>Selling Price</label>
-                        <input type="number" id="selling_price" class="form-control" placeholder="Ex: 22">
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-lg-12 mb-3">
-                    <a class="btn btn-info" id="add-product">Add to Purchase card</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        @include('admin.purchase.add_to_card_form')
     {{ Form::close() }}
 
 @endsection
@@ -175,7 +103,6 @@
                 var supplier = $('#supplier').val();
                 var product = $('#product').val();
                 var qty = $('#qty').val();
-                var category = $('#category').val();
                 var brand = $('#brand').val();
                 var color = $('#size').val();
                 var size = $('#size').val();
@@ -191,7 +118,6 @@
                             'supplier_id': supplier,
                             'product_id': product,
                             'qty': qty,
-                            'category_id': category,
                             'brand_id': brand,
                             'color_id': color,
                             'size_id': size,
@@ -203,7 +129,7 @@
                             $('#grand_total').html('৳ ' + res.grand_total)
                             $('#total').html('৳ ' + res.grand_total)
                             $('#append-data-table').show();
-                            $('#append-row').prepend(res.card_row);
+                            $('#append-row').append(res.card_row);
                             $('#total').val(res.total)
                             $('#qty').val(0);
                             // $('#myTable').append('<tr><td>my data</td><td>more data</td></tr>');
