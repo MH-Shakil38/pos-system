@@ -19,7 +19,7 @@
     @endif
     <div class="card-body">
         <div class="row">
-            {!! Form::open(['route'=>'admin.employee.store','method'=>'POST']) !!}
+            {!! Form::open(['route'=>'admin.employee.store','method'=>'POST','files'=>true]) !!}
             <div class="row">
                 <div class="col-md-12">
                     <h3>User Info</h3>
@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label> Product Image</label>
                         <div class="image-upload">
-                            <input type="file" name="image" multiple>
+                            <input type="file" name="image">
                             <div class="image-uploads">
                                 <img
                                     src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/upload.svg"

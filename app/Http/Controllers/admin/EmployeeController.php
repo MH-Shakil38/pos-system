@@ -51,13 +51,13 @@ class EmployeeController extends Controller
             $employeeData = $request->only([
                 'phone',
                 'nid',
-                'image',
                 'present_address',
                 'permanent_address',
                 'joining_date',
                 'joining_salary'
             ]);
             $employee = Employee::store($employeeData, $user);
+
             if($request->hasFile("image")){
                 $data["image"] = $this->FileProcessing($request->file("image"),PosService::EMPLOYEE_IMAGE,429,500);
                 $employee->update(["image"=>$data["image"]]);
