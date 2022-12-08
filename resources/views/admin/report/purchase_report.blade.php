@@ -133,27 +133,6 @@
                         {{--                        @endforelse--}}
                         </tbody>
                     </table>
-                    <div class="dataTables_length" id="DataTables_Table_0_length"><label><select
-                                name="DataTables_Table_0_length" aria-controls="DataTables_Table_0"
-                                class="custom-select custom-select-sm form-control form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select></label></div>
-                    <div class="dataTables_paginate paging_numbers" id="DataTables_Table_0_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0"
-                                                                            data-dt-idx="0" tabindex="0"
-                                                                            class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0"
-                                                                      data-dt-idx="1" tabindex="0"
-                                                                      class="page-link">2</a></li>
-                        </ul>
-                    </div>
-                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">1 - 10 of
-                        14 items
-                    </div>
                 </div>
             </div>
         </div>

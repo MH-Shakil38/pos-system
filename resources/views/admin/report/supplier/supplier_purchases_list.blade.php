@@ -1,16 +1,12 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>Customer List</h4>
-                <h6>Manage your Customers</h6>
-        </div>
-        <div class="page-btn">
-            <a href="{{route('admin.customer.create.blade.php')}}" class="btn btn-added"><img
-                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                    alt="img">Add Customer</a>
-        </div>
+    <div class="card-header">
+        @include('admin.include.page_header',
+                    ['header_name'=>'Supplier Purchase List',
+                    'title'=>'Manage Purchase List report',
+                    ])
     </div>
+    <hr>
 
     <div class="card">
         <div class="card-body">

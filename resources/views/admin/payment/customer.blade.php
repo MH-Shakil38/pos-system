@@ -1,11 +1,13 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>Customer List</h4>
-            <h6>Manage your Customers Report</h6>
-        </div>
+    <div class="card-header">
+        @include('admin.include.page_header',
+                    ['header_name'=>'Customer ways report list',
+                    'title'=>'manage your customer report',
+                    'route'=>'admin.employee.create',
+                    'button_name'=>'Employee Create'])
     </div>
+    <hr>
     <div class="row">
         <div class="col-md-7 col-sm-12 col-lg-7">
             <div class="card">

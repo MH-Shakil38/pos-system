@@ -469,34 +469,34 @@
 {{--                        </li>--}}
 {{--                    </ul>--}}
 {{--                </li>--}}
-{{--                <li class="submenu">--}}
-{{--                    <a class="" href="javascript:void(0);"><img--}}
-{{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/time.svg"--}}
-{{--                            alt="img"><span> Report</span> <span class="menu-arrow"></span></a>--}}
-{{--                    <ul>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaseorderreport">Purchase--}}
-{{--                                order report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/inventoryreport">Inventory--}}
-{{--                                Report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreport">Sales--}}
-{{--                                Report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/invoicereport">Invoice--}}
-{{--                                Report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereport">Purchase--}}
-{{--                                Report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierreport">Supplier--}}
-{{--                                Report</a></li>--}}
-{{--                        <li><a class=""--}}
-{{--                               href="https://dreamspos.dreamguystech.com/laravel/template/public/customerreport">Customer--}}
-{{--                                Report</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="submenu">
+                    <a class="" href="javascript:void(0);"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/time.svg"
+                            alt="img"><span> Report</span> <span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaseorderreport">Purchase
+                                order report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/inventoryreport">Inventory
+                                Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/salesreport">Sales
+                                Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/invoicereport">Invoice
+                                Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/purchasereport">Purchase
+                                Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/supplierreport">Supplier
+                                Report</a></li>
+                        <li><a class=""
+                               href="https://dreamspos.dreamguystech.com/laravel/template/public/customerreport">Customer
+                                Report</a></li>
+                    </ul>
+                </li>
 {{--                <li class="submenu">--}}
 {{--                    <a class="" href="javascript:void(0);"><img--}}
 {{--                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/users1.svg"--}}

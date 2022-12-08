@@ -8,7 +8,7 @@
                         'route'=>'admin.employee.create',
                         'button_name'=>'Employee Create'])
         </div>
-
+        <hr>
         <div class="card-body">
             @include('admin.include.table-header')
             <hr>

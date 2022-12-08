@@ -5,6 +5,7 @@ namespace App\Models\admin;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function PHPUnit\Framework\returnArgument;
 
 class Employee extends Model
 {
@@ -25,8 +26,13 @@ class Employee extends Model
     }
 
 
-    public static function getAll(){
-        return self::query()->with('user')->get();
+/***************************
+ * repository method start *
+ ***************************/
+
+    public static function getAll($order_by){
+        $query = self::query();
+        return ($order_by ? $query->orderBy('id','DESC') : $query)->with('user')->get();
     }
     public static function store($payload, $user){
         return self::query()->create([

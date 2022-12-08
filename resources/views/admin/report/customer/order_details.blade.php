@@ -1,11 +1,12 @@
 @extends('admin.layouts.master')
 @section('content')
-    <div class="page-header">
-        <div class="page-title">
-            <h4>Customer List</h4>
-            <h6>Manage your Customers Report</h6>
-        </div>
+    <div class="card-header">
+        @include('admin.include.page_header',
+                    ['header_name'=>'Customer order',
+                    'title'=>'Manage customer report',
+                    ])
     </div>
+    <hr>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-lg-12">
             <div class="card">

@@ -78,17 +78,19 @@ Route::name('admin.')->middleware(['auth'])->group(function () {
         Route::get('/customer-report-details/{id}',[ReportController::class,'customer_report_order_list'])->name('report.customer.order.list');
         Route::get('/customer-due-payment/sale_id/{id?}/customer_id/{customer_id?}','\App\Http\Controllers\admin\ReportController@customer_due_payment')->name('customer.due.payment');
         Route::post('/customer-due-payment-update/{id}','\App\Http\Controllers\admin\ReportController@customer_due_payment_update')->name('customer.payment.update');
-        Route::get('/supplier-report','\App\Http\Controllers\admin\ReportController@supplier_report')->name('report.supplier');
 
        /*suppliers report route*/
        Route::get('/admin-report-suppliers-purchases',[ReportController::class,'suppliers_purchase_list'])->name('report.suppliers.purchases');
        Route::get('admin_report_supplier_purchase_list/{supplier_id}',[ReportController::class,'supplier_purchases_list'])->name('report.supplier.purchase.list');
        Route::get('admin_report_supplier_purchase_details/{purchase_id}',[ReportController::class,'supplier_purchases_details'])->name('report.supplier.purchase.details');
-       Route::get('admin_report_purchases',[ReportController::class,'report_purchases'])->name('report.purchases');
+       Route::get('/supplier-report',[ReportController::class,'supplier_report'])->name('report.supplier');
 
 
-       /*sale report search*/
+       /** sale report search */
         Route::get('/sale/report',[ReportController::class,"sale_report"])->name('xyz');
+
+        /** purchase report */
+        Route::get('admin_report_purchases',[ReportController::class,'report_purchases'])->name('report.purchases');
 
     });
 

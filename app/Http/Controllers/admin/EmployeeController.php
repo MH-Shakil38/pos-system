@@ -22,7 +22,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $data['employees'] = Employee::getAll();
+        $data['employees'] = Employee::getAll(true);
         return view('admin.employee.index')->with($data);
     }
 

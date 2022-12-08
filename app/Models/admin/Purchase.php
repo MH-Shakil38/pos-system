@@ -40,6 +40,8 @@ class Purchase extends Model
             'status'=>$purchase['status'],
             'date'=>$purchase['date'],
         ]);
-
+    }
+    public static function getAll(){
+        return 'hello';
     }
 }

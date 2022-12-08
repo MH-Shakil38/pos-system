@@ -81,7 +81,8 @@ class ReportController extends Controller
  * */
 //purchase all report
 public function report_purchases(){
-    return 'report purchases';
+//    $data['purchases'] = Purchase::
+    return view('admin.report.purchase_report');
 }
 
 //  suppliers purchase list report
@@ -108,7 +109,7 @@ public function supplier_purchases_details($purchase_id){
 
     //supplier All time total purchase report
     public function supplier_report(){
-        return view('admin.report.supplier');
+        return view('admin.report.supplier_report');
     }
 /*
  * supplier report end
